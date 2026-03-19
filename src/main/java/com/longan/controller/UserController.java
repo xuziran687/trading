@@ -5,8 +5,10 @@ import com.longan.JWT.JwtUtil;
 import com.longan.pojo.DTO.LoginDTO;
 import com.longan.pojo.DTO.RegisterDTO;
 import com.longan.pojo.DTO.UserInfoDTO;
+import com.longan.pojo.DTO.UserProfileDTO;
 import com.longan.pojo.VO.LoginVO;
 import com.longan.pojo.VO.RegisterVO;
+import com.longan.pojo.entity.User;
 import com.longan.result.Result;
 import com.longan.service.UserService;
 import com.longan.utils.UserContext;
@@ -31,7 +33,7 @@ public class UserController {
     @PostMapping("/register")
     public Result register(@RequestBody RegisterDTO registerDTO){
         log.info("注册：{}", registerDTO);
-        UserEntity userEntity =userService.register(registerDTO);
+        User userEntity =userService.register(registerDTO);
         RegisterVO registerVO = new RegisterVO(
                 userEntity.getId(),
                 userEntity.getUsername(),
@@ -44,7 +46,7 @@ public class UserController {
     @PostMapping("/login")
     public Result login(@RequestBody LoginDTO loginDTO){
         log.info("登录：{}", loginDTO);
-        UserEntity userEntity = userService.login(loginDTO);
+        User userEntity = userService.login(loginDTO);
         //登录成功后，生成jwt令牌
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", userEntity.getId());
@@ -68,7 +70,7 @@ public class UserController {
 
         Long userId = UserContext.getUserId();
 
-        UserEntity user = userService.getById(userId);
+        User user = userService.getById(userId);
 
         return Result.success(user);
     }
@@ -78,7 +80,7 @@ public class UserController {
 
         Long userId = UserContext.getUserId();
 
-        UserEntity user = new UserEntity();
+        User user = new User();
         user.setId(userId);
         user.setNickname(dto.getNickname());
         user.setAvatar(dto.getAvatar());
@@ -93,9 +95,7 @@ public class UserController {
 
         Long userId = UserContext.getUserId();
 
-        UserEntity user = userService.getProfile(userId);
 
-        return Result.success(user);
     }
 
     @PutMapping("/profile")
@@ -103,13 +103,10 @@ public class UserController {
 
         Long userId = UserContext.getUserId();
 
-        UserEntity user = new UserEntity();
+        User user = new User();
         user.setId(userId);
         user.setNickname(dto.getNickname());
         user.setAvatar(dto.getAvatar());
-        user.setPhone(dto.getPhone());
-        user.setGender(dto.getGender());
-        user.setIntroduction(dto.getIntroduction());
 
         userService.updateById(user);
 
