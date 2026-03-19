@@ -1,0 +1,8 @@
+2026-02-04 19:46:39.786 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.12 with PID 22332 (F:\project\longan-apex\longan_apex\target\classes started by hp in F:\project\longan-apex\longan_apex)
+2026-02-04 19:46:39.788 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v4.0.2, Spring v7.0.3
+2026-02-04 19:46:39.788 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-02-04 19:46:40.528 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-02-04 19:46:40.529 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-02-04 19:46:40.529 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-04 19:46:40.944 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-02-04 19:46:40.960 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 1.431 seconds (process running for 2.158)

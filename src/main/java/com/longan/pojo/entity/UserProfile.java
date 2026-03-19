@@ -1,0 +1,61 @@
+package com.longan.pojo.entity;
+
+import com.baomidou.mybatisplus.annotation.*;
+
+import java.io.Serializable;
+import java.util.Date;
+import lombok.Data;
+
+/**
+ * 用户详情表
+ * @TableName user_profile
+ */
+@TableName(value ="user_profile")
+@Data
+public class UserProfile implements Serializable {
+    /**
+     * 主键ID
+     */
+    @TableId(type = IdType.AUTO)
+    private Long id;
+
+    /**
+     * 用户ID
+     */
+    private Long userId;
+
+    /**
+     * 0未知 1男 2女
+     */
+    private Integer gender;
+
+    /**
+     * 生日
+     */
+    private Date birthday;
+
+    /**
+     * 常用地址
+     */
+    private String address;
+
+    /**
+     * 个性签名
+     */
+    private String signature;
+
+    /**
+     * 创建时间
+     */
+    @TableField(fill = FieldFill.INSERT)
+    private Date createTime;
+
+    /**
+     * 更新时间
+     */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
+}
