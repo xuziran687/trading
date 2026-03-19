@@ -7,9 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterVO {
+public class LoginVO {
+
     private Long userId;
-    private String username;
     private String nickname;
-    private String email;
+    private String avatar;
+
+    private String token;
 }

@@ -37,11 +37,6 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
             //当前拦截到的不是动态方法，直接放行
             return true;
         }
-        //判断是不是登陆或注册方法
-        if (request.getRequestURI().contains("/api/user/login") || request.getRequestURI().contains("/api/user/register")){
-            log.info("当前请求是登陆或注册方法，不需要进行jwt校验");
-            return true;
-        }
 
         //1、从请求头中获取令牌
         String token = request.getHeader(jwtProperties.getTokenName());

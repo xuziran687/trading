@@ -2,14 +2,14 @@ package com.longan.pojo.VO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class RegisterVO {
+public class UserInfoVO {
+
     private Long userId;
-    private String username;
     private String nickname;
-    private String email;
+    private String avatar;
+    private String phone;
+    private Integer status;
 }

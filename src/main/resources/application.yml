@@ -5,33 +5,22 @@ springdoc:
     path: /swagger-ui.html
     tags-sorter: alpha
     operations-sorter: alpha
-  # ????????????? Controller ??????????????
   packages-to-scan: com.longan.controller
 
 knife4j:
-  enable: true # ?? Knife4j ?? UI
+  enable: true
   setting:
     language: zh-CN
     enableFooter: false
-    enableSwaggerModels: true # ??????
+    enableSwaggerModels: true
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/longan_apex?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/longan_apex
+         ?useUnicode=true
+         &characterEncoding=utf-8
+         &useSSL=false
+         &allowPublicKeyRetrieval=true
+         &serverTimezone=Asia/Shanghai
     username: root
-    password: 000000
-
-mybatis-plus:
-  # ??????????? XML ??????
-  type-aliases-package: com.longan.pojo.entity
-  # ??????
-  mapper-locations: resources/mapper
-  configuration:
-    # ?????????????? create_time -> ??? createTime?
-    map-underscore-to-camel-case: true
-    # ?? SQL ???????????
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  global-config:
-    db-config:
-      # ?????????
-      id-type: auto
+    password: '000000'
