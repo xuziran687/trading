@@ -1,6 +1,7 @@
 package com.longan.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.longan.pojo.entity.Goods;
 
 /**
 * @author hp
@@ -8,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2026-02-05 13:29:39
 * @Entity com.longan.entity.GoodsEntity
 */
-public interface GoodsMapper extends BaseMapper<GoodsEntity> {
+public interface GoodsMapper extends BaseMapper<Goods> {
 
 }
 

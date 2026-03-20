@@ -4,6 +4,8 @@ import com.longan.result.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "平台币交易")
 @RestController
 @RequestMapping("/api/order")
+@RequiredArgsConstructor
+@Slf4j
 public class OrderController {
 
     @Operation(summary = "购买商品", description = "扣除买家平台币余额并转入卖家账户")

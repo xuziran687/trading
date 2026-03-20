@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.longan.pojo.entity.ChatConversation;
 import com.longan.service.ChatConversationService;
 import com.longan.mapper.ChatConversationMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 * @createDate 2026-02-05 14:35:41
 */
 @Service
+@RequiredArgsConstructor
 public class ChatConversationServiceImpl extends ServiceImpl<ChatConversationMapper, ChatConversation>
     implements ChatConversationService{
 

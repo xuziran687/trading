@@ -13,7 +13,7 @@ import com.longan.pojo.entity.UserProfile;
 */
 public interface UserService extends IService<User> {
     User register(RegisterDTO registerDTO);
-    User login(LoginDTO loginDTO);
+    User login(LoginDTO loginDTO) throws Exception;
     UserProfile getProfile(Long userId);
 
 }

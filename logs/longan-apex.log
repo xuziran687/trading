@@ -1,70 +1,111 @@
-2026-02-05 13:57:37.261 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.12 with PID 103692 (F:\project\longan-apex\longan_apex\target\classes started by hp in F:\project\longan-apex\longan_apex)
-2026-02-05 13:57:37.263 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
-2026-02-05 13:57:37.264 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
-2026-02-05 13:57:38.540 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-2026-02-05 13:57:38.541 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2026-02-05 13:57:38.542 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
-2026-02-05 13:57:38.590 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-02-05 13:57:39.385 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-2026-02-05 13:57:39.405 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 2.581 seconds (process running for 3.555)
-2026-02-05 13:57:39.408 [main] INFO  com.longan.LonganApexApplication - 启动成功
-2026-02-05 13:57:43.375 [http-nio-8080-exec-2] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-02-05 13:57:44.099 [http-nio-8080-exec-10] INFO  org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 308 ms
-2026-02-05 13:57:46.909 [http-nio-8080-exec-5] INFO  org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 61 ms
-2026-02-05 13:58:28.910 [http-nio-8080-exec-8] INFO  com.longan.controller.UserController - 注册：RegisterDTO(username=admin, password=123456, email=longan@gmail.com)
-2026-02-05 13:58:29.005 [http-nio-8080-exec-8] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-02-05 13:58:29.555 [http-nio-8080-exec-8] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@703bd794
-2026-02-05 13:58:29.558 [http-nio-8080-exec-8] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-02-05 13:58:29.573 [http-nio-8080-exec-8] DEBUG com.longan.mapper.UserMapper.insert - ==>  Preparing: INSERT INTO user ( id, username, email, password, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ? )
-2026-02-05 13:58:29.619 [http-nio-8080-exec-8] DEBUG com.longan.mapper.UserMapper.insert - ==> Parameters: 2019289504007114753(Long), admin(String), longan@gmail.com(String), 123456(String), null, null
-2026-02-05 13:58:30.363 [http-nio-8080-exec-8] ERROR o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.DataIntegrityViolationException: 
-### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
-### The error may exist in com/longan/mapper/UserMapper.java (best guess)
-### The error may involve com.longan.mapper.UserMapper.insert-Inline
-### The error occurred while setting parameters
-### SQL: INSERT INTO user  ( id, username, email, password,     create_time, update_time )  VALUES (  ?, ?, ?, ?,     ?, ?  )
-### Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
-; Column 'create_time' cannot be null] with root cause
-java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot be null
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:109)
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114)
-	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:990)
-	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:384)
-	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
-	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:58)
-	at jdk.proxy3/jdk.proxy3.$Proxy108.execute(Unknown Source)
-	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:48)
-	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:75)
-	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
-	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
-	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
-	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
-	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:184)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425)
-	at jdk.proxy2/jdk.proxy2.$Proxy78.insert(Unknown Source)
-	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:272)
-	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:59)
+2026-03-20 12:21:44.916 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 55128 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 12:21:44.919 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 12:21:44.919 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 12:21:45.652 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:21:45.653 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 12:21:45.653 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 12:21:45.683 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 12:21:46.079 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 12:21:46.317 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:21:46.330 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 1.813 seconds (process running for 2.06)
+2026-03-20 12:21:46.333 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 12:22:12.552 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 12:22:13.234 [http-nio-8080-exec-10] INFO  org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 260 ms
+2026-03-20 12:24:19.987 [http-nio-8080-exec-5] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-20 12:24:20.052 [http-nio-8080-exec-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 12:26:32.366 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 55931 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 12:26:32.368 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 12:26:32.370 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 12:26:33.223 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:26:33.224 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 12:26:33.225 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 12:26:33.262 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 12:26:33.711 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 12:26:33.986 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:26:34.000 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 2.115 seconds (process running for 2.877)
+2026-03-20 12:26:34.002 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 12:26:45.770 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 12:26:45.846 [http-nio-8080-exec-1] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-20 12:27:09.597 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 12:27:37.538 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 56100 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 12:27:37.540 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 12:27:37.543 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 12:27:38.427 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:27:38.428 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 12:27:38.429 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 12:27:38.477 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 12:27:39.016 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 12:27:39.272 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:27:39.291 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 2.259 seconds (process running for 2.838)
+2026-03-20 12:27:39.293 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 12:28:02.884 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 12:28:02.950 [http-nio-8080-exec-1] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-20 12:28:08.998 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 12:28:42.927 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 56358 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 12:28:42.928 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 12:28:42.929 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 12:28:43.824 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:28:43.825 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 12:28:43.826 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 12:28:43.876 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 12:28:44.363 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 12:28:44.651 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:28:44.665 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 2.152 seconds (process running for 2.57)
+2026-03-20 12:28:44.668 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 12:28:47.204 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 12:28:47.294 [http-nio-8080-exec-1] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-20 12:28:59.650 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 12:30:09.918 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 56663 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 12:30:09.919 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 12:30:09.920 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 12:30:10.951 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:30:10.953 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 12:30:10.953 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 12:30:11.006 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 12:30:11.493 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 12:30:11.816 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:30:11.843 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 2.392 seconds (process running for 2.865)
+2026-03-20 12:30:11.847 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 12:30:14.109 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 12:30:14.191 [http-nio-8080-exec-1] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-20 12:30:39.878 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 12:31:05.955 [http-nio-8080-exec-2] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-20 12:31:05.956 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 12:31:20.931 [http-nio-8080-exec-3] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-20 12:32:02.047 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 12:35:09.446 [http-nio-8080-exec-5] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-20 12:35:09.447 [http-nio-8080-exec-5] INFO  com.longan.service.impl.UserServiceImpl - 执行用户查询，条件：(username = #{ew.paramNameValuePairs.MPGENVAL1})
+2026-03-20 12:35:09.448 [http-nio-8080-exec-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 12:35:10.460 [http-nio-8080-exec-5] ERROR com.longan.service.impl.UserServiceImpl - 执行 selectOne 查询时发生异常
+org.mybatis.spring.MyBatisSystemException: null
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:97)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:439)
+	at jdk.proxy2/jdk.proxy2.$Proxy80.selectList(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.selectList(SqlSessionTemplate.java:224)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.executeForMany(MybatisMapperMethod.java:164)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:77)
 	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:152)
 	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89)
-	at jdk.proxy2/jdk.proxy2.$Proxy82.insert(Unknown Source)
-	at com.longan.service.impl.UserServiceImpl.register(UserServiceImpl.java:35)
+	at jdk.proxy2/jdk.proxy2.$Proxy84.selectList(Unknown Source)
+	at com.baomidou.mybatisplus.core.mapper.BaseMapper.selectOne(BaseMapper.java:222)
+	at java.base/java.lang.invoke.MethodHandle.invokeWithArguments(MethodHandle.java:732)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$DefaultMethodInvoker.invoke(MybatisMapperProxy.java:166)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89)
+	at jdk.proxy2/jdk.proxy2.$Proxy84.selectOne(Unknown Source)
+	at com.baomidou.mybatisplus.core.mapper.BaseMapper.selectOne(BaseMapper.java:211)
+	at java.base/java.lang.invoke.MethodHandle.invokeWithArguments(MethodHandle.java:732)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$DefaultMethodInvoker.invoke(MybatisMapperProxy.java:166)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89)
+	at jdk.proxy2/jdk.proxy2.$Proxy84.selectOne(Unknown Source)
+	at com.longan.service.impl.UserServiceImpl.login(UserServiceImpl.java:64)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:724)
-	at com.longan.service.impl.UserServiceImpl$$SpringCGLIB$$0.register(<generated>)
-	at com.longan.controller.UserController.register(UserController.java:37)
+	at com.longan.service.impl.UserServiceImpl$$SpringCGLIB$$0.login(<generated>)
+	at com.longan.controller.UserController.login(UserController.java:49)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -114,74 +155,100 @@ java.sql.SQLIntegrityConstraintViolationException: Column 'create_time' cannot b
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
-	at java.base/java.lang.Thread.run(Thread.java:842)
-2026-02-05 14:00:56.405 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-02-05 14:00:56.413 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2026-02-05 14:01:38.000 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.12 with PID 104900 (F:\project\longan-apex\longan_apex\target\classes started by hp in F:\project\longan-apex\longan_apex)
-2026-02-05 14:01:38.001 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
-2026-02-05 14:01:38.002 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
-2026-02-05 14:01:38.782 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-2026-02-05 14:01:38.783 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2026-02-05 14:01:38.783 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
-2026-02-05 14:01:38.818 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-02-05 14:01:39.432 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-2026-02-05 14:01:39.450 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 1.816 seconds (process running for 2.192)
-2026-02-05 14:01:39.452 [main] INFO  com.longan.LonganApexApplication - 启动成功
-2026-02-05 14:01:44.431 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-02-05 14:01:44.538 [http-nio-8080-exec-1] INFO  com.longan.controller.UserController - 注册：RegisterDTO(username=admin, password=123456, email=longan@gmail.com)
-2026-02-05 14:01:44.617 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-02-05 14:01:44.837 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@27bee3b8
-2026-02-05 14:01:44.840 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-02-05 14:01:44.849 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.insert - ==>  Preparing: INSERT INTO user ( id, username, email, password, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ? )
-2026-02-05 14:01:44.889 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.insert - ==> Parameters: 2019290324454957058(Long), admin(String), longan@gmail.com(String), 123456(String), 2026-02-05T14:01:44.608445600(LocalDateTime), 2026-02-05T14:01:44.610430400(LocalDateTime)
-2026-02-05 14:01:45.046 [http-nio-8080-exec-1] ERROR o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.DataIntegrityViolationException: 
-### Error updating database.  Cause: java.sql.SQLException: Field 'nickname' doesn't have a default value
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection
 ### The error may exist in com/longan/mapper/UserMapper.java (best guess)
-### The error may involve com.longan.mapper.UserMapper.insert-Inline
-### The error occurred while setting parameters
-### SQL: INSERT INTO user  ( id, username, email, password,     create_time, update_time )  VALUES (  ?, ?, ?, ?,     ?, ?  )
-### Cause: java.sql.SQLException: Field 'nickname' doesn't have a default value
-; Field 'nickname' doesn't have a default value] with root cause
-java.sql.SQLException: Field 'nickname' doesn't have a default value
+### The error may involve com.longan.mapper.UserMapper.selectList
+### The error occurred while executing a query
+### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:156)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:147)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:142)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425)
+	... 76 common frames omitted
+Caused by: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:84)
+	at org.mybatis.spring.transaction.SpringManagedTransaction.openConnection(SpringManagedTransaction.java:80)
+	at org.mybatis.spring.transaction.SpringManagedTransaction.getConnection(SpringManagedTransaction.java:67)
+	at org.apache.ibatis.executor.BaseExecutor.getConnection(BaseExecutor.java:348)
+	at org.apache.ibatis.executor.SimpleExecutor.prepareStatement(SimpleExecutor.java:89)
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:64)
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:336)
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:158)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:110)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:90)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:154)
+	... 83 common frames omitted
+Caused by: java.sql.SQLException: Access denied for user 'root'@'172.17.0.1' (using password: YES)
 	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121)
 	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114)
-	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:990)
-	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:384)
-	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
-	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:58)
-	at jdk.proxy3/jdk.proxy3.$Proxy101.execute(Unknown Source)
-	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:48)
-	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:75)
-	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
-	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
-	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
-	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
-	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:184)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425)
-	at jdk.proxy2/jdk.proxy2.$Proxy78.insert(Unknown Source)
-	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:272)
-	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:59)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:837)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:420)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:238)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:180)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:139)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:368)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:205)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:483)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:571)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:101)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:111)
+	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:160)
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:118)
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:81)
+	... 93 common frames omitted
+2026-03-20 12:35:16.230 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 57179 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 12:35:16.232 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 12:35:16.232 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 12:35:17.189 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:35:17.191 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 12:35:17.192 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 12:35:17.255 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 12:35:17.813 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 12:35:18.100 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:35:18.115 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 2.348 seconds (process running for 2.907)
+2026-03-20 12:35:18.118 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 12:35:19.288 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 12:35:20.192 [http-nio-8080-exec-4] INFO  org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 244 ms
+2026-03-20 12:35:35.281 [http-nio-8080-exec-5] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-20 12:35:38.062 [http-nio-8080-exec-5] INFO  com.longan.service.impl.UserServiceImpl - 执行用户查询，条件：(username = #{ew.paramNameValuePairs.MPGENVAL1})
+2026-03-20 12:35:42.001 [http-nio-8080-exec-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 12:35:49.239 [http-nio-8080-exec-5] ERROR com.longan.service.impl.UserServiceImpl - 执行 selectOne 查询时发生异常
+org.mybatis.spring.MyBatisSystemException: null
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:97)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:439)
+	at jdk.proxy2/jdk.proxy2.$Proxy80.selectList(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.selectList(SqlSessionTemplate.java:224)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.executeForMany(MybatisMapperMethod.java:164)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:77)
 	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:152)
 	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89)
-	at jdk.proxy2/jdk.proxy2.$Proxy82.insert(Unknown Source)
-	at com.longan.service.impl.UserServiceImpl.register(UserServiceImpl.java:35)
+	at jdk.proxy2/jdk.proxy2.$Proxy84.selectList(Unknown Source)
+	at com.baomidou.mybatisplus.core.mapper.BaseMapper.selectOne(BaseMapper.java:222)
+	at java.base/java.lang.invoke.MethodHandle.invokeWithArguments(MethodHandle.java:732)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$DefaultMethodInvoker.invoke(MybatisMapperProxy.java:166)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89)
+	at jdk.proxy2/jdk.proxy2.$Proxy84.selectOne(Unknown Source)
+	at com.baomidou.mybatisplus.core.mapper.BaseMapper.selectOne(BaseMapper.java:211)
+	at java.base/java.lang.invoke.MethodHandle.invokeWithArguments(MethodHandle.java:732)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$DefaultMethodInvoker.invoke(MybatisMapperProxy.java:166)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89)
+	at jdk.proxy2/jdk.proxy2.$Proxy84.selectOne(Unknown Source)
+	at com.longan.service.impl.UserServiceImpl.login(UserServiceImpl.java:64)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:724)
-	at com.longan.service.impl.UserServiceImpl$$SpringCGLIB$$0.register(<generated>)
-	at com.longan.controller.UserController.register(UserController.java:37)
+	at com.longan.service.impl.UserServiceImpl$$SpringCGLIB$$0.login(<generated>)
+	at com.longan.controller.UserController.login(UserController.java:49)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -231,129 +298,210 @@ java.sql.SQLException: Field 'nickname' doesn't have a default value
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
-	at java.base/java.lang.Thread.run(Thread.java:842)
-2026-02-05 14:06:45.083 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-02-05 14:06:45.089 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2026-02-05 14:06:51.319 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.12 with PID 52300 (F:\project\longan-apex\longan_apex\target\classes started by hp in F:\project\longan-apex\longan_apex)
-2026-02-05 14:06:51.320 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
-2026-02-05 14:06:51.322 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
-2026-02-05 14:06:52.199 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-2026-02-05 14:06:52.199 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2026-02-05 14:06:52.199 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
-2026-02-05 14:06:52.239 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-02-05 14:06:52.978 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-2026-02-05 14:06:53.003 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 2.122 seconds (process running for 2.583)
-2026-02-05 14:06:53.006 [main] INFO  com.longan.LonganApexApplication - 启动成功
-2026-02-05 14:06:59.347 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-02-05 14:06:59.478 [http-nio-8080-exec-1] INFO  com.longan.controller.UserController - 注册：RegisterDTO(username=admin, password=123456, email=longan@gmail.com)
-2026-02-05 14:06:59.550 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-02-05 14:06:59.732 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@293e4544
-2026-02-05 14:06:59.733 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-02-05 14:06:59.738 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.insert - ==>  Preparing: INSERT INTO user ( id, username, email, password, nickname, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
-2026-02-05 14:06:59.760 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.insert - ==> Parameters: 2019291645383819265(Long), admin(String), longan@gmail.com(String), 123456(String), admin(String), 2026-02-05T14:06:59.545397(LocalDateTime), 2026-02-05T14:06:59.545397(LocalDateTime)
-2026-02-05 14:06:59.784 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.insert - <==    Updates: 1
-2026-02-05 14:07:38.925 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-02-05 14:07:38.930 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2026-02-05 14:08:19.862 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.12 with PID 107332 (F:\project\longan-apex\longan_apex\target\classes started by hp in F:\project\longan-apex\longan_apex)
-2026-02-05 14:08:19.863 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
-2026-02-05 14:08:19.864 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
-2026-02-05 14:08:20.660 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-2026-02-05 14:08:20.661 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2026-02-05 14:08:20.662 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
-2026-02-05 14:08:20.699 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-02-05 14:08:21.344 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-2026-02-05 14:08:21.369 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 1.908 seconds (process running for 2.31)
-2026-02-05 14:08:21.372 [main] INFO  com.longan.LonganApexApplication - 启动成功
-2026-02-05 14:08:24.837 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-02-05 14:08:24.969 [http-nio-8080-exec-1] INFO  com.longan.controller.UserController - 注册：RegisterDTO(username=admin, password=123456, email=longan@gmail.com)
-2026-02-05 14:08:25.055 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-02-05 14:08:25.259 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6ccfab95
-2026-02-05 14:08:25.261 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-02-05 14:08:25.271 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.insert - ==>  Preparing: INSERT INTO user ( id, username, email, password, nickname, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
-2026-02-05 14:08:25.307 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.insert - ==> Parameters: 2019292004009426946(Long), admin(String), longan@gmail.com(String), 123456(String), 新用户ab71f0ea-0f96-4601-b4da-45ad1e544806(String), 2026-02-05T14:08:25.049328100(LocalDateTime), 2026-02-05T14:08:25.049328100(LocalDateTime)
-2026-02-05 14:08:25.321 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.insert - <==    Updates: 1
-2026-02-05 14:09:35.897 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-02-05 14:09:35.901 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2026-02-05 14:09:45.564 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.12 with PID 106528 (F:\project\longan-apex\longan_apex\target\classes started by hp in F:\project\longan-apex\longan_apex)
-2026-02-05 14:09:45.565 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
-2026-02-05 14:09:45.565 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
-2026-02-05 14:09:46.319 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-2026-02-05 14:09:46.320 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2026-02-05 14:09:46.320 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
-2026-02-05 14:09:46.358 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-02-05 14:09:47.015 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-2026-02-05 14:09:47.032 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 1.854 seconds (process running for 2.227)
-2026-02-05 14:09:47.035 [main] INFO  com.longan.LonganApexApplication - 启动成功
-2026-02-05 14:09:48.610 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-02-05 14:09:48.724 [http-nio-8080-exec-1] INFO  com.longan.controller.UserController - 注册：RegisterDTO(username=admin, password=123456, email=longan@gmail.com)
-2026-02-05 14:09:48.797 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-02-05 14:09:48.997 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@293e4544
-2026-02-05 14:09:48.999 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-02-05 14:09:49.008 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.insert - ==>  Preparing: INSERT INTO user ( id, username, email, password, nickname, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
-2026-02-05 14:09:49.039 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.insert - ==> Parameters: 2019292355265650689(Long), admin(String), longan@gmail.com(String), 123456(String), 新用户1b0a196f44454773(String), 2026-02-05T14:09:48.794508800(LocalDateTime), 2026-02-05T14:09:48.794508800(LocalDateTime)
-2026-02-05 14:09:49.212 [http-nio-8080-exec-1] ERROR o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.DuplicateKeyException: 
-### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'longan@gmail.com' for key 'user.uk_phone'
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection
 ### The error may exist in com/longan/mapper/UserMapper.java (best guess)
-### The error may involve com.longan.mapper.UserMapper.insert-Inline
-### The error occurred while setting parameters
-### SQL: INSERT INTO user  ( id, username, email, password, nickname,    create_time, update_time )  VALUES (  ?, ?, ?, ?, ?,    ?, ?  )
-### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'longan@gmail.com' for key 'user.uk_phone'
-; Duplicate entry 'longan@gmail.com' for key 'user.uk_phone'] with root cause
-java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'longan@gmail.com' for key 'user.uk_phone'
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:109)
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114)
-	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:990)
-	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:384)
-	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
-	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:58)
-	at jdk.proxy3/jdk.proxy3.$Proxy101.execute(Unknown Source)
-	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:48)
-	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:75)
-	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
-	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
-	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
-	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
-	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:184)
+### The error may involve com.longan.mapper.UserMapper.selectList
+### The error occurred while executing a query
+### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:156)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:147)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:142)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425)
-	at jdk.proxy2/jdk.proxy2.$Proxy78.insert(Unknown Source)
-	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:272)
-	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:59)
-	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:152)
-	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89)
-	at jdk.proxy2/jdk.proxy2.$Proxy82.insert(Unknown Source)
-	at com.longan.service.impl.UserServiceImpl.register(UserServiceImpl.java:35)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
-	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:724)
-	at com.longan.service.impl.UserServiceImpl$$SpringCGLIB$$0.register(<generated>)
-	at com.longan.controller.UserController.register(UserController.java:37)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	... 76 common frames omitted
+Caused by: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:84)
+	at org.mybatis.spring.transaction.SpringManagedTransaction.openConnection(SpringManagedTransaction.java:80)
+	at org.mybatis.spring.transaction.SpringManagedTransaction.getConnection(SpringManagedTransaction.java:67)
+	at org.apache.ibatis.executor.BaseExecutor.getConnection(BaseExecutor.java:348)
+	at org.apache.ibatis.executor.SimpleExecutor.prepareStatement(SimpleExecutor.java:89)
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:64)
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:336)
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:158)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:110)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:90)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:154)
+	... 83 common frames omitted
+Caused by: java.sql.SQLException: Access denied for user 'root'@'172.17.0.1' (using password: YES)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:837)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:420)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:238)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:180)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:139)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:368)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:205)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:483)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:571)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:101)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:111)
+	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:160)
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:118)
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:81)
+	... 93 common frames omitted
+2026-03-20 12:37:34.670 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 57442 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 12:37:34.671 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 12:37:34.671 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 12:37:35.503 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:37:35.504 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 12:37:35.504 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 12:37:35.544 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 12:37:36.059 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 12:37:36.354 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:37:36.371 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 2.152 seconds (process running for 2.562)
+2026-03-20 12:37:36.373 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 12:37:40.167 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 12:37:40.273 [http-nio-8080-exec-1] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-20 12:37:42.127 [http-nio-8080-exec-1] INFO  com.longan.service.impl.UserServiceImpl - 执行用户查询，条件：(username = #{ew.paramNameValuePairs.MPGENVAL1})
+2026-03-20 12:37:43.741 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 12:37:44.347 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@205c6264
+2026-03-20 12:37:44.352 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-20 12:37:44.393 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.selectList - ==>  Preparing: SELECT id,username,email,password,nickname,avatar,status,is_deleted,create_time,update_time FROM user WHERE (username = ?)
+2026-03-20 12:37:44.541 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.selectList - ==> Parameters: 123456789(String)
+2026-03-20 12:37:44.689 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.selectList - <==      Total: 0
+2026-03-20 12:38:00.992 [http-nio-8080-exec-1] INFO  com.longan.service.impl.UserServiceImpl - 用户不存在
+2026-03-20 12:38:51.671 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-20 12:38:51.673 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-20 12:43:39.468 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 57951 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 12:43:39.469 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 12:43:39.469 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 12:43:40.298 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:43:40.300 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 12:43:40.300 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 12:43:40.344 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 12:43:40.729 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 12:43:40.983 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:43:40.998 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 1.994 seconds (process running for 2.432)
+2026-03-20 12:43:41.001 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 12:43:44.352 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 12:43:44.432 [http-nio-8080-exec-1] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-20 12:43:44.440 [http-nio-8080-exec-1] INFO  com.longan.service.impl.UserServiceImpl - 执行用户查询，条件：(username = #{ew.paramNameValuePairs.MPGENVAL1})
+2026-03-20 12:43:44.499 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 12:43:44.656 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5db87503
+2026-03-20 12:43:44.658 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-20 12:43:44.663 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.selectList - ==>  Preparing: SELECT id,username,email,password,nickname,avatar,status,is_deleted,create_time,update_time FROM user WHERE (username = ?)
+2026-03-20 12:43:44.680 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.selectList - ==> Parameters: 123456789(String)
+2026-03-20 12:43:44.695 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.selectList - <==      Total: 0
+2026-03-20 12:43:44.699 [http-nio-8080-exec-1] INFO  com.longan.service.impl.UserServiceImpl - 用户不存在，用户名：123456789
+2026-03-20 12:43:58.383 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-20 12:43:58.392 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-20 12:45:47.548 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 58182 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 12:45:47.550 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 12:45:47.550 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 12:45:48.462 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:45:48.463 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 12:45:48.463 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 12:45:48.507 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 12:45:48.874 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 12:45:49.123 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:45:49.137 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 2.134 seconds (process running for 2.664)
+2026-03-20 12:45:49.140 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 12:45:54.564 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 12:45:54.682 [http-nio-8080-exec-1] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-20 12:45:54.690 [http-nio-8080-exec-1] INFO  com.longan.service.impl.UserServiceImpl - 执行用户查询，条件：(email = #{ew.paramNameValuePairs.MPGENVAL1})
+2026-03-20 12:45:54.749 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 12:45:55.004 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@499a3411
+2026-03-20 12:45:55.007 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-20 12:45:55.020 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.selectList - ==>  Preparing: SELECT id,username,email,password,nickname,avatar,status,is_deleted,create_time,update_time FROM user WHERE (email = ?)
+2026-03-20 12:45:55.045 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.selectList - ==> Parameters: 123456789(String)
+2026-03-20 12:45:55.084 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.selectList - <==      Total: 1
+2026-03-20 12:45:55.088 [http-nio-8080-exec-1] INFO  com.longan.service.impl.UserServiceImpl - 用户登录成功，用户名：123456789
+2026-03-20 12:46:29.012 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-20 12:46:29.017 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-20 12:47:22.121 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 58437 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 12:47:22.123 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 12:47:22.123 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 12:47:22.980 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:47:22.981 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 12:47:22.982 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 12:47:23.027 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 12:47:23.447 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 12:47:23.711 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:47:23.725 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 2.085 seconds (process running for 2.568)
+2026-03-20 12:47:23.727 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 12:47:27.266 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 12:47:27.343 [http-nio-8080-exec-1] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-20 12:47:27.349 [http-nio-8080-exec-1] INFO  com.longan.service.impl.UserServiceImpl - 执行用户查询，条件：(email = #{ew.paramNameValuePairs.MPGENVAL1})
+2026-03-20 12:47:27.477 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 12:47:27.625 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6a079852
+2026-03-20 12:47:27.626 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-20 12:47:27.631 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.selectList - ==>  Preparing: SELECT id,username,email,password,nickname,avatar,status,is_deleted,create_time,update_time FROM user WHERE (email = ?)
+2026-03-20 12:47:27.646 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.selectList - ==> Parameters: 123456789(String)
+2026-03-20 12:47:27.661 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.selectList - <==      Total: 1
+2026-03-20 12:47:27.664 [http-nio-8080-exec-1] INFO  com.longan.service.impl.UserServiceImpl - 用户登录成功，用户名：123456789
+2026-03-20 12:47:31.764 [http-nio-8080-exec-2] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-20 12:47:31.765 [http-nio-8080-exec-2] INFO  com.longan.service.impl.UserServiceImpl - 执行用户查询，条件：(email = #{ew.paramNameValuePairs.MPGENVAL1})
+2026-03-20 12:47:31.766 [http-nio-8080-exec-2] DEBUG com.longan.mapper.UserMapper.selectList - ==>  Preparing: SELECT id,username,email,password,nickname,avatar,status,is_deleted,create_time,update_time FROM user WHERE (email = ?)
+2026-03-20 12:47:31.766 [http-nio-8080-exec-2] DEBUG com.longan.mapper.UserMapper.selectList - ==> Parameters: 123456789(String)
+2026-03-20 12:47:31.768 [http-nio-8080-exec-2] DEBUG com.longan.mapper.UserMapper.selectList - <==      Total: 1
+2026-03-20 12:47:31.768 [http-nio-8080-exec-2] INFO  com.longan.service.impl.UserServiceImpl - 用户登录成功，用户名：123456789
+2026-03-20 12:48:17.862 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-20 12:48:17.867 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-20 12:48:26.419 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 58714 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 12:48:26.420 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 12:48:26.421 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 12:48:27.347 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:48:27.349 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 12:48:27.350 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 12:48:27.393 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 12:48:27.782 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 12:48:28.046 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:48:28.061 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 2.149 seconds (process running for 2.854)
+2026-03-20 12:48:28.063 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 12:48:31.946 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 12:48:32.047 [http-nio-8080-exec-1] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-20 12:48:32.054 [http-nio-8080-exec-1] INFO  com.longan.service.impl.UserServiceImpl - 执行用户查询，条件：(email = #{ew.paramNameValuePairs.MPGENVAL1})
+2026-03-20 12:48:32.128 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 12:48:32.328 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@770301e5
+2026-03-20 12:48:32.329 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-20 12:48:32.334 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.selectList - ==>  Preparing: SELECT id,username,email,password,nickname,avatar,status,is_deleted,create_time,update_time FROM user WHERE (email = ?)
+2026-03-20 12:48:32.351 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.selectList - ==> Parameters: 123456789(String)
+2026-03-20 12:48:32.367 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.selectList - <==      Total: 1
+2026-03-20 12:48:32.371 [http-nio-8080-exec-1] INFO  com.longan.service.impl.UserServiceImpl - 用户登录成功，用户名：123456789
+2026-03-20 12:49:39.811 [http-nio-8080-exec-3] INFO  com.longan.JWT.JwtTokenInterceptor - jwt校验:eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzczOTgyMTEyLCJleHAiOjE3NzM5ODkzMTJ9.PkEIL5M5kq7cX8b9IE-GVct_d3mbOw5n5ffInfEuQpk
+2026-03-20 12:49:39.842 [http-nio-8080-exec-3] DEBUG com.longan.mapper.UserMapper.selectById - ==>  Preparing: SELECT id,username,email,password,nickname,avatar,status,is_deleted,create_time,update_time FROM user WHERE id=?
+2026-03-20 12:49:39.843 [http-nio-8080-exec-3] DEBUG com.longan.mapper.UserMapper.selectById - ==> Parameters: null
+2026-03-20 12:49:39.844 [http-nio-8080-exec-3] DEBUG com.longan.mapper.UserMapper.selectById - <==      Total: 0
+2026-03-20 12:50:04.273 [http-nio-8080-exec-4] INFO  com.longan.JWT.JwtTokenInterceptor - jwt校验:eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzczOTgyMTEyLCJleHAiOjE3NzM5ODkzMTJ9.PkEIL5M5kq7cX8b9IE-GVct_d3mbOw5n5ffInfEuQpk
+2026-03-20 12:50:35.361 [http-nio-8080-exec-4] DEBUG com.longan.mapper.UserMapper.selectById - ==>  Preparing: SELECT id,username,email,password,nickname,avatar,status,is_deleted,create_time,update_time FROM user WHERE id=?
+2026-03-20 12:50:35.370 [http-nio-8080-exec-4] DEBUG com.longan.mapper.UserMapper.selectById - ==> Parameters: null
+2026-03-20 12:50:35.376 [http-nio-8080-exec-4] DEBUG com.longan.mapper.UserMapper.selectById - <==      Total: 0
+2026-03-20 12:50:35.391 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-20 12:50:35.400 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-20 12:54:32.184 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 59296 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 12:54:32.186 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 12:54:32.186 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 12:54:33.131 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:54:33.133 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 12:54:33.133 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 12:54:33.176 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 12:54:33.676 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 12:54:34.037 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:54:34.060 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 2.413 seconds (process running for 2.86)
+2026-03-20 12:54:34.063 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 12:54:38.383 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 12:54:38.410 [http-nio-8080-exec-1] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：null
+2026-03-20 12:54:38.436 [http-nio-8080-exec-1] ERROR com.longan.JWT.JwtTokenInterceptor - JWT校验失败
+java.lang.IllegalArgumentException: JWT String argument cannot be null or empty.
+	at io.jsonwebtoken.lang.Assert.hasText(Assert.java:132)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:527)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:589)
+	at io.jsonwebtoken.impl.ImmutableJwtParser.parseClaimsJws(ImmutableJwtParser.java:173)
+	at com.longan.JWT.JwtUtil.parseJWT(JwtUtil.java:44)
+	at com.longan.JWT.JwtTokenInterceptor.preHandle(JwtTokenInterceptor.java:40)
+	at org.springframework.web.servlet.HandlerExecutionChain.applyPreHandle(HandlerExecutionChain.java:146)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1084)
 	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
 	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
-	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
 	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
@@ -388,60 +536,22 @@ java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'longan@gmail
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
-	at java.base/java.lang.Thread.run(Thread.java:842)
-2026-02-05 14:12:19.642 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-02-05 14:12:19.648 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2026-02-05 14:12:25.593 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.12 with PID 105896 (F:\project\longan-apex\longan_apex\target\classes started by hp in F:\project\longan-apex\longan_apex)
-2026-02-05 14:12:25.594 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
-2026-02-05 14:12:25.595 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
-2026-02-05 14:12:26.427 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-2026-02-05 14:12:26.429 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2026-02-05 14:12:26.429 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
-2026-02-05 14:12:26.467 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-02-05 14:12:27.147 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-2026-02-05 14:12:27.171 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 1.984 seconds (process running for 2.347)
-2026-02-05 14:12:27.174 [main] INFO  com.longan.LonganApexApplication - 启动成功
-2026-02-05 14:12:33.041 [http-nio-8080-exec-2] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-02-05 14:12:33.152 [http-nio-8080-exec-2] INFO  com.longan.controller.UserController - 注册：RegisterDTO(username=admin, password=123456, email=longan@gmail.com)
-2026-02-05 14:12:33.235 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-02-05 14:12:33.417 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@766103a6
-2026-02-05 14:12:33.420 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-02-05 14:12:33.431 [http-nio-8080-exec-2] DEBUG com.longan.mapper.UserMapper.selectCount - ==>  Preparing: SELECT COUNT( * ) AS total FROM user WHERE (email = ?)
-2026-02-05 14:12:33.460 [http-nio-8080-exec-2] DEBUG com.longan.mapper.UserMapper.selectCount - ==> Parameters: longan@gmail.com(String)
-2026-02-05 14:12:33.493 [http-nio-8080-exec-2] DEBUG com.longan.mapper.UserMapper.selectCount - <==      Total: 1
-2026-02-05 14:12:33.508 [http-nio-8080-exec-2] DEBUG com.longan.mapper.UserMapper.insert - ==>  Preparing: INSERT INTO user ( id, username, email, password, nickname, create_time, update_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
-2026-02-05 14:12:33.509 [http-nio-8080-exec-2] DEBUG com.longan.mapper.UserMapper.insert - ==> Parameters: 2019293046126219265(Long), admin(String), longan@gmail.com(String), 123456(String), 新用户955025f3b0374909(String), 2026-02-05T14:12:33.508224100(LocalDateTime), 2026-02-05T14:12:33.508224100(LocalDateTime)
-2026-02-05 14:12:33.516 [http-nio-8080-exec-2] DEBUG com.longan.mapper.UserMapper.insert - <==    Updates: 1
-2026-02-05 14:12:37.009 [http-nio-8080-exec-3] INFO  com.longan.controller.UserController - 注册：RegisterDTO(username=admin, password=123456, email=longan@gmail.com)
-2026-02-05 14:12:37.010 [http-nio-8080-exec-3] DEBUG com.longan.mapper.UserMapper.selectCount - ==>  Preparing: SELECT COUNT( * ) AS total FROM user WHERE (email = ?)
-2026-02-05 14:12:37.011 [http-nio-8080-exec-3] DEBUG com.longan.mapper.UserMapper.selectCount - ==> Parameters: longan@gmail.com(String)
-2026-02-05 14:12:37.012 [http-nio-8080-exec-3] DEBUG com.longan.mapper.UserMapper.selectCount - <==      Total: 1
-2026-02-05 14:12:37.014 [http-nio-8080-exec-3] ERROR o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: 邮箱已被注册] with root cause
-java.lang.RuntimeException: 邮箱已被注册
-	at com.longan.service.impl.UserServiceImpl.register(UserServiceImpl.java:39)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
-	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:724)
-	at com.longan.service.impl.UserServiceImpl$$SpringCGLIB$$0.register(<generated>)
-	at com.longan.controller.UserController.register(UserController.java:37)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2026-03-20 12:54:42.058 [http-nio-8080-exec-2] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：null
+2026-03-20 12:54:42.060 [http-nio-8080-exec-2] ERROR com.longan.JWT.JwtTokenInterceptor - JWT校验失败
+java.lang.IllegalArgumentException: JWT String argument cannot be null or empty.
+	at io.jsonwebtoken.lang.Assert.hasText(Assert.java:132)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:527)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:589)
+	at io.jsonwebtoken.impl.ImmutableJwtParser.parseClaimsJws(ImmutableJwtParser.java:173)
+	at com.longan.JWT.JwtUtil.parseJWT(JwtUtil.java:44)
+	at com.longan.JWT.JwtTokenInterceptor.preHandle(JwtTokenInterceptor.java:40)
+	at org.springframework.web.servlet.HandlerExecutionChain.applyPreHandle(HandlerExecutionChain.java:146)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1084)
 	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
 	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
-	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
 	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
@@ -476,26 +586,35 @@ java.lang.RuntimeException: 邮箱已被注册
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
-	at java.base/java.lang.Thread.run(Thread.java:842)
-2026-02-05 14:12:46.549 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-02-05 14:12:46.554 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2026-02-05 14:14:43.123 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.12 with PID 106908 (F:\project\longan-apex\longan_apex\target\classes started by hp in F:\project\longan-apex\longan_apex)
-2026-02-05 14:14:43.125 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
-2026-02-05 14:14:43.125 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
-2026-02-05 14:14:43.932 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-2026-02-05 14:14:43.933 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2026-02-05 14:14:43.933 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
-2026-02-05 14:14:43.972 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-02-05 14:14:44.669 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-2026-02-05 14:14:44.688 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 1.956 seconds (process running for 2.337)
-2026-02-05 14:14:44.690 [main] INFO  com.longan.LonganApexApplication - 启动成功
-2026-02-05 14:14:46.969 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-02-05 14:14:47.092 [http-nio-8080-exec-1] INFO  com.longan.controller.UserController - 注册：RegisterDTO(username=admin, password=123456, email=longan@gmail.com)
-2026-02-05 14:14:47.175 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-02-05 14:14:47.363 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@71a7b8fb
-2026-02-05 14:14:47.366 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-02-05 14:14:47.373 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.selectCount - ==>  Preparing: SELECT COUNT( * ) AS total FROM user WHERE (email = ?)
-2026-02-05 14:14:47.400 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.selectCount - ==> Parameters: longan@gmail.com(String)
-2026-02-05 14:14:47.429 [http-nio-8080-exec-1] DEBUG com.longan.mapper.UserMapper.selectCount - <==      Total: 1
-2026-02-05 14:15:35.753 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-02-05 14:15:35.757 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2026-03-20 12:54:51.036 [http-nio-8080-exec-6] INFO  org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 242 ms
+2026-03-20 12:55:07.736 [http-nio-8080-exec-7] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-20 12:55:07.741 [http-nio-8080-exec-7] INFO  com.longan.service.impl.UserServiceImpl - 执行用户查询，条件：(email = #{ew.paramNameValuePairs.MPGENVAL1})
+2026-03-20 12:55:07.801 [http-nio-8080-exec-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 12:55:07.927 [http-nio-8080-exec-7] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3dfa9ee7
+2026-03-20 12:55:07.929 [http-nio-8080-exec-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-20 12:55:07.933 [http-nio-8080-exec-7] DEBUG com.longan.mapper.UserMapper.selectList - ==>  Preparing: SELECT id,username,email,password,nickname,avatar,status,is_deleted,create_time,update_time FROM user WHERE (email = ?)
+2026-03-20 12:55:07.949 [http-nio-8080-exec-7] DEBUG com.longan.mapper.UserMapper.selectList - ==> Parameters: 123456789(String)
+2026-03-20 12:55:07.967 [http-nio-8080-exec-7] DEBUG com.longan.mapper.UserMapper.selectList - <==      Total: 1
+2026-03-20 12:55:07.972 [http-nio-8080-exec-7] INFO  com.longan.service.impl.UserServiceImpl - 用户登录成功，用户名：123456789
+2026-03-20 12:55:24.125 [http-nio-8080-exec-8] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzczOTgyNTA3LCJleHAiOjE3NzM5ODk3MDd9.kyQBmKUB4zenS0v4vlgerSus4kIEU8yw8JGMhOyRS0I
+2026-03-20 12:55:24.134 [http-nio-8080-exec-8] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-20 12:55:35.796 [http-nio-8080-exec-8] DEBUG com.longan.mapper.UserMapper.selectById - ==>  Preparing: SELECT id,username,email,password,nickname,avatar,status,is_deleted,create_time,update_time FROM user WHERE id=?
+2026-03-20 12:55:35.802 [http-nio-8080-exec-8] DEBUG com.longan.mapper.UserMapper.selectById - ==> Parameters: 1001(Long)
+2026-03-20 12:55:35.809 [http-nio-8080-exec-8] DEBUG com.longan.mapper.UserMapper.selectById - <==      Total: 1
+2026-03-20 12:55:35.811 [http-nio-8080-exec-8] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-20 12:55:48.005 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-20 12:55:48.011 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-20 12:57:41.163 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 60719 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 12:57:41.164 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 12:57:41.164 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 12:57:42.002 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:57:42.003 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 12:57:42.004 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 12:57:42.040 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 12:57:42.422 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 12:57:42.661 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 12:57:42.675 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 2.012 seconds (process running for 2.293)
+2026-03-20 12:57:42.677 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 12:57:45.409 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 12:57:45.882 [http-nio-8080-exec-4] INFO  org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 248 ms

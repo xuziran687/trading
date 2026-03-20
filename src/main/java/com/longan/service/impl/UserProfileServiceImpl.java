@@ -1,8 +1,10 @@
 package com.longan.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.longan.pojo.entity.UserProfile;
 import com.longan.service.UserProfileService;
 import com.longan.mapper.UserProfileMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,7 +13,8 @@ import org.springframework.stereotype.Service;
 * @createDate 2026-02-05 14:28:56
 */
 @Service
-public class UserProfileServiceImpl extends ServiceImpl<UserProfileMapper, UserProfileEntity>
+@RequiredArgsConstructor
+public class UserProfileServiceImpl extends ServiceImpl<UserProfileMapper, UserProfile>
     implements UserProfileService{
 
 }

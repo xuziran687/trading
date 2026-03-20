@@ -5,8 +5,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.longan.mapper.UserProfileMapper;
 import com.longan.pojo.DTO.LoginDTO;
 import com.longan.pojo.DTO.RegisterDTO;
+import com.longan.pojo.entity.User;
+import com.longan.pojo.entity.UserProfile;
 import com.longan.service.UserService;
 import com.longan.mapper.UserMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,20 +21,19 @@ import org.springframework.stereotype.Service;
 */
 @Service
 @Slf4j
-public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>
+@RequiredArgsConstructor
+public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     implements UserService{
-    @Autowired
-    private UserMapper userMapper;
-    @Autowired
-    private UserProfileMapper userProfileMapper;
+
+    private final UserProfileMapper userProfileMapper;
 
 
     @Override
-    public UserEntity register(RegisterDTO dto) {
+    public User register(RegisterDTO dto) {
 
         // 1. 邮箱查重
-        Long count = userMapper.selectCount(
-                new QueryWrapper<UserEntity>()
+        Long count = baseMapper.selectCount(
+                new QueryWrapper<User>()
                         .eq("email", dto.getEmail())
         );
 
@@ -40,36 +42,56 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity>
         }
 
         // 2. 创建用户
-        UserEntity user = new UserEntity();
+        User user = new User();
         user.setUsername(dto.getUsername());
         user.setEmail(dto.getEmail());
         user.setPassword(dto.getPassword());
 
-        userMapper.insert(user);
+        baseMapper.insert(user);
         return user;
     }
 
 
     @Override
-    public UserEntity login(LoginDTO loginDTO) {
-        QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("username", loginDTO.getEmail());
-        if (userMapper.selectOne(queryWrapper) == null){
-            log.info("用户不存在");
-        }else{
-            queryWrapper.eq("password", loginDTO.getPassword());
-            if (userMapper.selectOne(queryWrapper) != null){
-                return userMapper.selectOne(queryWrapper);
-            }else{
-                log.info("密码错误");
+    public User login(LoginDTO loginDTO){
+        // 1. 初始化查询条件（仅查用户名）
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("email", loginDTO.getEmail());
+
+        try {
+            log.info("执行用户查询，条件：{}", queryWrapper.getSqlSegment());
+
+            // 2. 只查询一次数据库，获取用户信息
+            User user = baseMapper.selectOne(queryWrapper);
+
+            // 3. 第一步：判断邮箱是否存在
+            if (user == null) {
+                log.info("邮箱不存在，用户名：{}", loginDTO.getEmail());
+                return null; // 直接返回null，告知Controller登录失败
             }
+
+            // 4. 第二步：对比密码（关键！直接用已查询的用户对象对比，无需重复查库）
+            // 【重要】生产环境必须用加密密码对比（比如BCrypt），这里先写明文示例，后续要替换
+            if (!loginDTO.getPassword().equals(user.getPassword())) {
+                log.info("密码错误，用户名：{}", loginDTO.getEmail());
+                return null; // 密码错误也返回null
+            }
+
+            // 5. 登录成功：返回完整的用户对象（仅返回必要字段更佳）
+            log.info("用户登录成功，用户名：{}", loginDTO.getEmail());
+            return user;
+
+        } catch (Exception e) {
+            log.error("用户登录查询异常，用户名：{}", loginDTO.getEmail(), e);
+            // 若没有自定义异常，也可抛运行时异常，但要确保外层Controller能捕获
+            throw new RuntimeException("用户查询失败", e);
         }
-        return null;
     }
 
+
     @Override
-    public UserProfileEntity getProfile(Long userId) {
-        QueryWrapper<UserProfileEntity> queryWrapper = new QueryWrapper<>();
+    public UserProfile getProfile(Long userId) {
+        QueryWrapper<UserProfile> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_id", userId);
         userProfileMapper.selectOne(queryWrapper);
 

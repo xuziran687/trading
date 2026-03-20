@@ -6,26 +6,9 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 public class JwtProperties {
-    private String SecretKey="longan-apex-jwt-secret-key-2026-very-very-secure!!!";
-    private long Ttl=7200000;
-    private String TokenName="token";
-
-    public void setSecretKey(String secretKey) {
-        SecretKey = secretKey;
-    }
-    public void setTtl(long ttl) {
-        Ttl = ttl;
-    }
-    public void setTokenName(String tokenName) {
-        TokenName = tokenName;
-    }
-    public String getSecretKey() {
-        return SecretKey;
-    }
-    public long getTtl() {
-        return Ttl;
-    }
-    public String getTokenName() {
-        return TokenName;
-    }
+    // 修正：小驼峰命名（符合JavaBean规范）
+    private String secretKey = "longan-apex-jwt-secret-key-2026-very-very-secure!!!";
+    private long ttl = 7200000; // 2小时
+    // 建议改为Authorization（前端主流传参方式），如果要保留token也可以，后续前端要对应
+    private String tokenName = "Authorization";
 }

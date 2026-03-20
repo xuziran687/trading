@@ -1,8 +1,10 @@
 package com.longan.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.longan.pojo.entity.Goods;
 import com.longan.service.GoodsService;
 import com.longan.mapper.GoodsMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,7 +13,8 @@ import org.springframework.stereotype.Service;
 * @createDate 2026-02-05 13:29:39
 */
 @Service
-public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, GoodsEntity>
+@RequiredArgsConstructor
+public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods>
     implements GoodsService{
 
 }

@@ -2,10 +2,15 @@ package com.longan.controller;
 
 import com.longan.pojo.DTO.GoodsDTO;
 import com.longan.result.Result;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-
+@Tag(name = "商品管理")
 @RestController
 @RequestMapping("/api/goods")
+@RequiredArgsConstructor
+@Slf4j
 public class GoodsController {
     @PostMapping
     public Result release(@RequestBody GoodsDTO goodsDTO){
