@@ -7,43 +7,70 @@ import com.longan.pojo.DTO.RegisterDTO;
 import com.longan.pojo.DTO.UserInfoDTO;
 import com.longan.pojo.DTO.UserProfileDTO;
 import com.longan.pojo.VO.LoginVO;
-import com.longan.pojo.VO.RegisterVO;
 import com.longan.pojo.entity.User;
+import com.longan.pojo.entity.UserProfile;
+import com.longan.pojo.entity.UserWallet;
 import com.longan.result.Result;
+import com.longan.service.UserProfileService;
 import com.longan.service.UserService;
+import com.longan.service.UserWalletService;
 import com.longan.utils.UserContext;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+
 @Tag(name = "用户接口")
 @RestController
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
 @Slf4j
+//
+//简单查询     → GET
+//复杂查询     → POST（推荐🔥）
+//新增         → POST
+//更新         → PUT
+//删除         → DELETE
 public class UserController {
     private final UserService userService;
+    private final UserWalletService userWalletService;
     private final JwtProperties jwtProperties;
-//    1. 注册
+    private final UserProfileService userProfileService;
+
+    //    1. 注册
 //    POST /api/user/register
 //    功能：手机号注册，自动创建钱包、信用记录
+    @Operation(summary = "用户注册")
     @PostMapping("/register")
-    public Result register(@RequestBody RegisterDTO registerDTO){
+    public Result register(@RequestBody RegisterDTO registerDTO) {
         log.info("注册：{}", registerDTO);
-        User userEntity =userService.register(registerDTO);
-        RegisterVO registerVO = new RegisterVO(
-                userEntity.getId(),
-                userEntity.getUsername(),
-                userEntity.getNickname(),
-                userEntity.getEmail()
-        );
-        return Result.success(registerVO);
+
+        // 1. 创建用户主表
+        User user = new User();
+        user.setEmail(registerDTO.getEmail());
+        user.setPassword(registerDTO.getPassword());
+        userService.insert(user); // 执行完后 user.getId() 自动回填
+
+        // 2. 初始化钱包 (关键步骤)
+        UserWallet wallet = new UserWallet();
+        wallet.setUserId(user.getId());
+        wallet.setBalance(BigDecimal.ZERO);      // 余额 0
+        wallet.setFreeze(BigDecimal.ZERO);       // 冻结 0
+        wallet.setTotalIncome(BigDecimal.ZERO);  // 累计收入 0
+        wallet.setTotalOutcome(BigDecimal.ZERO); // 累计支出 0
+
+
+        userWalletService.insert(wallet); // 调用对应的 mapper.insert
+
+        return Result.success();
     }
 
+    @Operation(summary = "用户登录")
     @PostMapping("/login")
     public Result login(@RequestBody LoginDTO loginDTO) throws Exception {
         log.info("登录：{}", loginDTO);
@@ -57,7 +84,7 @@ public class UserController {
             return Result.error("用户名或密码错误");
         }
 
-        // 3. 登录成功，生成jwt令牌（此时userEntity一定非空）
+        // 3. 登录成功，生成jwt令牌（此时user一定非空）
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", user.getId());
         String token = JwtUtil.createJWT(
@@ -79,59 +106,68 @@ public class UserController {
 
     //获取当前用户信息
     //GET /api/user/info
+    @Operation(summary = "获取当前用户信息")
     @GetMapping("/info")
-    public Result info(){
-
+    public Result info() {
         Long userId = UserContext.getUserId();
-
-        User user = userService.getById(userId);
-
+        User user = userService.selectById(userId);
         return Result.success(user);
     }
 
+    @Operation(summary = "更新用户信息")
     @PutMapping("/info")
-    public Result updateInfo(@RequestBody UserInfoDTO dto){
+    public Result updateInfo(@RequestBody UserInfoDTO dto) {
 
         Long userId = UserContext.getUserId();
 
         User user = new User();
         user.setId(userId);
+        user.setUsername(dto.getUsername());
         user.setNickname(dto.getNickname());
         user.setAvatar(dto.getAvatar());
-
         userService.updateById(user);
 
         return Result.success();
     }
+    //用户资料
 
+    @Operation(summary = "设置用户资料")
+    @PostMapping("/profile")
+    public Result insertProfile(@RequestBody UserProfileDTO dto) {
+        Long userId = UserContext.getUserId();
+
+        UserProfile exist = userProfileService.getByUserId(userId);
+
+        if (exist == null) {
+            UserProfile userProfile = new UserProfile();
+            userProfile.setUserId(userId);
+            userProfile.setGender(dto.getGender());
+            userProfile.setBirthday(dto.getBirthday());
+            userProfile.setAddress(dto.getAddress());
+            userProfile.setSignature(dto.getSignature());
+            userProfileService.insert(userProfile);
+        } else {
+            userProfileService.updateByUserId(dto);
+        }
+
+        return Result.success();
+    }
+
+    @Operation(summary = "获取用户资料")
     @GetMapping("/profile")
-    public Result profile(){
-
+    public Result profile() {
         Long userId = UserContext.getUserId();
-        Result<UserProfileDTO> result = Result.success();
-        return result.success(userService.getProfile(userId));
-        
+        return Result.success(userProfileService.getByUserId(userId));
     }
 
+    @Operation(summary = "更新用户资料")
     @PutMapping("/profile")
-    public Result updateProfile(@RequestBody UserProfileDTO dto){
+    public Result updateProfile(@RequestBody UserProfileDTO dto) {
 
-        Long userId = UserContext.getUserId();
-
-        User user = new User();
-        user.setId(userId);
-        user.setNickname(dto.getNickname());
-        user.setAvatar(dto.getAvatar());
-
-        userService.updateById(user);
+        userProfileService.updateByUserId(dto);
 
         return Result.success();
     }
-
-
-
-
-
 
 
 }

@@ -14,8 +14,7 @@ import org.springframework.stereotype.Service;
 */
 @Service
 @RequiredArgsConstructor
-public class ChatConversationServiceImpl extends ServiceImpl<ChatConversationMapper, ChatConversation>
-    implements ChatConversationService{
+public class ChatConversationServiceImpl     implements ChatConversationService{
 
 }
 

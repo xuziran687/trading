@@ -1,59 +1,32 @@
 package com.longan.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.longan.mapper.UserMapper;
 import com.longan.mapper.UserProfileMapper;
 import com.longan.pojo.DTO.LoginDTO;
-import com.longan.pojo.DTO.RegisterDTO;
 import com.longan.pojo.entity.User;
 import com.longan.pojo.entity.UserProfile;
 import com.longan.service.UserService;
-import com.longan.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
-* @author hp
-* @description 针对表【user(用户表)】的数据库操作Service实现
-* @createDate 2026-02-05 13:43:12
-*/
+ * @author hp
+ * @description 针对表【user(用户表)】的数据库操作Service实现
+ * @createDate 2026-02-05 13:43:12
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class UserServiceImpl extends ServiceImpl<UserMapper, User>
-    implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserProfileMapper userProfileMapper;
+    private final UserMapper userMapper;
 
 
     @Override
-    public User register(RegisterDTO dto) {
-
-        // 1. 邮箱查重
-        Long count = baseMapper.selectCount(
-                new QueryWrapper<User>()
-                        .eq("email", dto.getEmail())
-        );
-
-        if (count > 0) {
-            throw new RuntimeException("邮箱已被注册");
-        }
-
-        // 2. 创建用户
-        User user = new User();
-        user.setUsername(dto.getUsername());
-        user.setEmail(dto.getEmail());
-        user.setPassword(dto.getPassword());
-
-        baseMapper.insert(user);
-        return user;
-    }
-
-
-    @Override
-    public User login(LoginDTO loginDTO){
+    public User login(LoginDTO loginDTO) {
         // 1. 初始化查询条件（仅查用户名）
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("email", loginDTO.getEmail());
@@ -62,7 +35,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             log.info("执行用户查询，条件：{}", queryWrapper.getSqlSegment());
 
             // 2. 只查询一次数据库，获取用户信息
-            User user = baseMapper.selectOne(queryWrapper);
+            User user = userMapper.selectOne(queryWrapper);
 
             // 3. 第一步：判断邮箱是否存在
             if (user == null) {
@@ -94,8 +67,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         QueryWrapper<UserProfile> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_id", userId);
         userProfileMapper.selectOne(queryWrapper);
-
         return null;
+    }
+
+    @Override
+    public void insert(User user) {
+        userMapper.insert(user);
+    }
+
+    @Override
+    public User selectById(Long userId) {
+        return userMapper.selectById(userId);
+    }
+
+    @Override
+    public void updateById(User user) {
+        userMapper.updateById(user);
     }
 }
 

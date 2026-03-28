@@ -1,16 +1,17 @@
 package com.longan.pojo.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 商品分类表
+ *
  * @TableName category
  */
-@TableName(value ="category")
+@TableName(value = "category")
 @Data
 public class Category implements Serializable {
     /**

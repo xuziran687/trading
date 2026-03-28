@@ -1,23 +1,25 @@
 package com.longan.pojo.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
-import lombok.Data;
+import java.time.LocalDateTime;
 
 /**
  * 商品表
+ *
  * @TableName goods
  */
-@TableName(value ="goods")
+@TableName(value = "goods")
 @Data
 public class Goods implements Serializable {
     /**
      * 主键ID
      */
-    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
@@ -28,7 +30,7 @@ public class Goods implements Serializable {
     /**
      * 商品描述
      */
-    private String desc;
+    private String description;
 
     /**
      * 价格
@@ -79,13 +81,13 @@ public class Goods implements Serializable {
      * 发布时间
      */
     @TableField(fill = FieldFill.INSERT)
-    private Date createTime;
+    private LocalDateTime createTime;
 
     /**
      * 更新时间
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

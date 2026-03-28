@@ -1,0 +1,575 @@
+2026-03-20 13:06:06.799 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 62685 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 13:06:06.800 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 13:06:06.801 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 13:06:07.588 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 13:06:07.589 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 13:06:07.589 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 13:06:07.616 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 13:06:07.981 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 13:06:08.220 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 13:06:08.233 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 1.833 seconds (process running for 2.123)
+2026-03-20 13:06:08.235 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 13:06:12.451 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 13:06:12.945 [http-nio-8080-exec-4] INFO  org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 248 ms
+2026-03-20 13:06:37.739 [http-nio-8080-exec-5] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：null
+2026-03-20 13:06:37.778 [http-nio-8080-exec-5] ERROR com.longan.JWT.JwtTokenInterceptor - JWT校验失败
+java.lang.IllegalArgumentException: JWT String argument cannot be null or empty.
+	at io.jsonwebtoken.lang.Assert.hasText(Assert.java:132)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:527)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:589)
+	at io.jsonwebtoken.impl.ImmutableJwtParser.parseClaimsJws(ImmutableJwtParser.java:173)
+	at com.longan.JWT.JwtUtil.parseJWT(JwtUtil.java:44)
+	at com.longan.JWT.JwtTokenInterceptor.preHandle(JwtTokenInterceptor.java:40)
+	at org.springframework.web.servlet.HandlerExecutionChain.applyPreHandle(HandlerExecutionChain.java:146)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1084)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2026-03-20 13:06:39.223 [http-nio-8080-exec-6] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：null
+2026-03-20 13:06:39.225 [http-nio-8080-exec-6] ERROR com.longan.JWT.JwtTokenInterceptor - JWT校验失败
+java.lang.IllegalArgumentException: JWT String argument cannot be null or empty.
+	at io.jsonwebtoken.lang.Assert.hasText(Assert.java:132)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:527)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:589)
+	at io.jsonwebtoken.impl.ImmutableJwtParser.parseClaimsJws(ImmutableJwtParser.java:173)
+	at com.longan.JWT.JwtUtil.parseJWT(JwtUtil.java:44)
+	at com.longan.JWT.JwtTokenInterceptor.preHandle(JwtTokenInterceptor.java:40)
+	at org.springframework.web.servlet.HandlerExecutionChain.applyPreHandle(HandlerExecutionChain.java:146)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1084)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2026-03-20 13:07:01.689 [http-nio-8080-exec-7] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-20 13:07:01.693 [http-nio-8080-exec-7] INFO  com.longan.service.impl.UserServiceImpl - 执行用户查询，条件：(email = #{ew.paramNameValuePairs.MPGENVAL1})
+2026-03-20 13:07:01.741 [http-nio-8080-exec-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 13:07:01.833 [http-nio-8080-exec-7] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@728b4a30
+2026-03-20 13:07:01.834 [http-nio-8080-exec-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-20 13:07:01.839 [http-nio-8080-exec-7] DEBUG com.longan.mapper.UserMapper.selectList - ==>  Preparing: SELECT id,username,email,password,nickname,avatar,status,is_deleted,create_time,update_time FROM user WHERE (email = ?)
+2026-03-20 13:07:01.853 [http-nio-8080-exec-7] DEBUG com.longan.mapper.UserMapper.selectList - ==> Parameters: 123456789(String)
+2026-03-20 13:07:01.871 [http-nio-8080-exec-7] DEBUG com.longan.mapper.UserMapper.selectList - <==      Total: 1
+2026-03-20 13:07:01.874 [http-nio-8080-exec-7] INFO  com.longan.service.impl.UserServiceImpl - 用户登录成功，用户名：123456789
+2026-03-20 13:07:27.445 [http-nio-8080-exec-8] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzczOTgzMjIxLCJleHAiOjE3NzM5OTA0MjF9.KGnwUstesdDBDSnMvDHHy9DGGydG8TQs7KdP2FmUCPg
+2026-03-20 13:07:27.451 [http-nio-8080-exec-8] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-20 13:07:27.453 [http-nio-8080-exec-8] DEBUG com.longan.mapper.UserMapper.selectById - ==>  Preparing: SELECT id,username,email,password,nickname,avatar,status,is_deleted,create_time,update_time FROM user WHERE id=?
+2026-03-20 13:07:27.454 [http-nio-8080-exec-8] DEBUG com.longan.mapper.UserMapper.selectById - ==> Parameters: 1001(Long)
+2026-03-20 13:07:27.456 [http-nio-8080-exec-8] DEBUG com.longan.mapper.UserMapper.selectById - <==      Total: 1
+2026-03-20 13:07:27.459 [http-nio-8080-exec-8] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-20 13:07:28.487 [http-nio-8080-exec-9] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzczOTgzMjIxLCJleHAiOjE3NzM5OTA0MjF9.KGnwUstesdDBDSnMvDHHy9DGGydG8TQs7KdP2FmUCPg
+2026-03-20 13:07:28.489 [http-nio-8080-exec-9] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-20 13:07:28.490 [http-nio-8080-exec-9] DEBUG com.longan.mapper.UserMapper.selectById - ==>  Preparing: SELECT id,username,email,password,nickname,avatar,status,is_deleted,create_time,update_time FROM user WHERE id=?
+2026-03-20 13:07:28.491 [http-nio-8080-exec-9] DEBUG com.longan.mapper.UserMapper.selectById - ==> Parameters: 1001(Long)
+2026-03-20 13:07:28.493 [http-nio-8080-exec-9] DEBUG com.longan.mapper.UserMapper.selectById - <==      Total: 1
+2026-03-20 13:07:28.494 [http-nio-8080-exec-9] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-20 13:07:43.583 [http-nio-8080-exec-10] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzczOTgzMjIxLCJleHAiOjE3NzM5OTA0MjF9.KGnwUstesdDBDSnMvDHHy9DGGydG8TQs7KdP2FmUCPg
+2026-03-20 13:07:43.586 [http-nio-8080-exec-10] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-20 13:07:43.588 [http-nio-8080-exec-10] DEBUG com.longan.mapper.UserProfileMapper.selectList - ==>  Preparing: SELECT id,user_id,gender,birthday,address,signature,create_time,update_time FROM user_profile WHERE (user_id = ?)
+2026-03-20 13:07:43.589 [http-nio-8080-exec-10] DEBUG com.longan.mapper.UserProfileMapper.selectList - ==> Parameters: 1001(Long)
+2026-03-20 13:07:43.595 [http-nio-8080-exec-10] DEBUG com.longan.mapper.UserProfileMapper.selectList - <==      Total: 1
+2026-03-20 13:07:43.597 [http-nio-8080-exec-10] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-20 13:09:04.060 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-20 13:09:04.066 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-20 16:57:48.216 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 33233 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 16:57:48.217 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 16:57:48.218 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 16:57:48.894 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 16:57:48.895 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 16:57:48.895 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 16:57:48.919 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 16:57:49.271 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 16:57:49.541 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 16:57:49.555 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 1.754 seconds (process running for 2.015)
+2026-03-20 16:57:49.558 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 16:57:56.048 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 16:57:56.701 [http-nio-8080-exec-3] INFO  org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 177 ms
+2026-03-20 16:58:19.812 [http-nio-8080-exec-4] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-20 16:58:19.816 [http-nio-8080-exec-4] INFO  com.longan.service.impl.UserServiceImpl - 执行用户查询，条件：(email = #{ew.paramNameValuePairs.MPGENVAL1})
+2026-03-20 16:58:19.863 [http-nio-8080-exec-4] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 16:58:19.953 [http-nio-8080-exec-4] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@24e87dad
+2026-03-20 16:58:19.954 [http-nio-8080-exec-4] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-20 16:58:19.987 [http-nio-8080-exec-4] INFO  com.longan.service.impl.UserServiceImpl - 用户登录成功，用户名：123456789
+2026-03-20 16:59:08.491 [http-nio-8080-exec-5] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzczOTk3MDk5LCJleHAiOjE3NzQwMDQyOTl9.B9LPYC_ShxAPzfzI20tpVkyT7QiG_kg7rIT4SvLOGkE
+2026-03-20 16:59:08.502 [http-nio-8080-exec-5] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-20 16:59:08.506 [http-nio-8080-exec-5] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-20 16:59:58.604 [http-nio-8080-exec-6] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzczOTk3MDk5LCJleHAiOjE3NzQwMDQyOTl9.B9LPYC_ShxAPzfzI20tpVkyT7QiG_kg7rIT4SvLOGkE
+2026-03-20 16:59:58.606 [http-nio-8080-exec-6] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-20 16:59:58.676 [http-nio-8080-exec-6] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-20 17:00:18.519 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-20 17:00:18.523 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-20 17:04:23.352 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 33794 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 17:04:23.353 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 17:04:23.353 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 17:04:23.948 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 17:04:23.949 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 17:04:23.949 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 17:04:23.975 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 17:04:24.333 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 17:04:24.517 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 17:04:24.528 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 1.525 seconds (process running for 1.795)
+2026-03-20 17:04:24.530 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 17:04:32.835 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 17:04:32.846 [http-nio-8080-exec-1] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzczOTk3MDk5LCJleHAiOjE3NzQwMDQyOTl9.B9LPYC_ShxAPzfzI20tpVkyT7QiG_kg7rIT4SvLOGkE
+2026-03-20 17:04:32.877 [http-nio-8080-exec-1] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-20 17:04:32.937 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 17:04:33.011 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@258d0294
+2026-03-20 17:04:33.012 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-20 17:04:33.128 [http-nio-8080-exec-1] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-20 17:06:23.134 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-20 17:06:23.138 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-20 17:06:34.983 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 34080 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 17:06:34.984 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 17:06:34.984 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 17:06:35.592 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 17:06:35.593 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 17:06:35.593 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 17:06:35.615 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 17:06:35.918 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 17:06:36.098 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 17:06:36.109 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 1.47 seconds (process running for 1.684)
+2026-03-20 17:06:36.111 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 17:06:41.010 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 17:06:41.021 [http-nio-8080-exec-1] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzczOTk3MDk5LCJleHAiOjE3NzQwMDQyOTl9.B9LPYC_ShxAPzfzI20tpVkyT7QiG_kg7rIT4SvLOGkE
+2026-03-20 17:06:41.053 [http-nio-8080-exec-1] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-20 17:06:41.115 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 17:06:41.203 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3506f323
+2026-03-20 17:06:41.204 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-20 17:06:41.258 [http-nio-8080-exec-1] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-20 17:07:54.471 [http-nio-8080-exec-3] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzczOTk3MDk5LCJleHAiOjE3NzQwMDQyOTl9.B9LPYC_ShxAPzfzI20tpVkyT7QiG_kg7rIT4SvLOGkE
+2026-03-20 17:07:54.473 [http-nio-8080-exec-3] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-20 17:07:54.506 [http-nio-8080-exec-3] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-20 17:10:00.997 [http-nio-8080-exec-6] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzczOTk3MDk5LCJleHAiOjE3NzQwMDQyOTl9.B9LPYC_ShxAPzfzI20tpVkyT7QiG_kg7rIT4SvLOGkE
+2026-03-20 17:10:00.999 [http-nio-8080-exec-6] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-20 17:10:01.006 [http-nio-8080-exec-6] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-20 17:10:01.906 [http-nio-8080-exec-5] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzczOTk3MDk5LCJleHAiOjE3NzQwMDQyOTl9.B9LPYC_ShxAPzfzI20tpVkyT7QiG_kg7rIT4SvLOGkE
+2026-03-20 17:10:01.908 [http-nio-8080-exec-5] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-20 17:10:01.910 [http-nio-8080-exec-5] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-20 17:10:15.202 [http-nio-8080-exec-10] INFO  org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 150 ms
+2026-03-20 17:12:52.970 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-20 17:12:52.974 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-20 17:13:00.733 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 34673 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 17:13:00.734 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 17:13:00.735 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 17:13:01.302 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 17:13:01.303 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 17:13:01.303 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 17:13:01.325 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 17:13:01.664 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 17:13:01.842 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 17:13:01.852 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 1.46 seconds (process running for 1.674)
+2026-03-20 17:13:01.854 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 17:13:19.647 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 17:13:19.657 [http-nio-8080-exec-1] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：null
+2026-03-20 17:13:19.670 [http-nio-8080-exec-1] ERROR com.longan.JWT.JwtTokenInterceptor - JWT校验失败
+java.lang.IllegalArgumentException: JWT String argument cannot be null or empty.
+	at io.jsonwebtoken.lang.Assert.hasText(Assert.java:132)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:527)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:589)
+	at io.jsonwebtoken.impl.ImmutableJwtParser.parseClaimsJws(ImmutableJwtParser.java:173)
+	at com.longan.JWT.JwtUtil.parseJWT(JwtUtil.java:44)
+	at com.longan.JWT.JwtTokenInterceptor.preHandle(JwtTokenInterceptor.java:40)
+	at org.springframework.web.servlet.HandlerExecutionChain.applyPreHandle(HandlerExecutionChain.java:146)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1084)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2026-03-20 17:13:25.395 [http-nio-8080-exec-2] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：null
+2026-03-20 17:13:25.396 [http-nio-8080-exec-2] ERROR com.longan.JWT.JwtTokenInterceptor - JWT校验失败
+java.lang.IllegalArgumentException: JWT String argument cannot be null or empty.
+	at io.jsonwebtoken.lang.Assert.hasText(Assert.java:132)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:527)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:589)
+	at io.jsonwebtoken.impl.ImmutableJwtParser.parseClaimsJws(ImmutableJwtParser.java:173)
+	at com.longan.JWT.JwtUtil.parseJWT(JwtUtil.java:44)
+	at com.longan.JWT.JwtTokenInterceptor.preHandle(JwtTokenInterceptor.java:40)
+	at org.springframework.web.servlet.HandlerExecutionChain.applyPreHandle(HandlerExecutionChain.java:146)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1084)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2026-03-20 17:15:51.565 [http-nio-8080-exec-6] INFO  org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 221 ms
+2026-03-20 17:16:18.409 [http-nio-8080-exec-7] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-20 17:16:18.413 [http-nio-8080-exec-7] INFO  com.longan.service.impl.UserServiceImpl - 执行用户查询，条件：(email = #{ew.paramNameValuePairs.MPGENVAL1})
+2026-03-20 17:16:18.460 [http-nio-8080-exec-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 17:16:18.555 [http-nio-8080-exec-7] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4970b475
+2026-03-20 17:16:18.557 [http-nio-8080-exec-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-20 17:16:18.595 [http-nio-8080-exec-7] INFO  com.longan.service.impl.UserServiceImpl - 用户登录成功，用户名：123456789
+2026-03-20 17:16:35.841 [http-nio-8080-exec-8] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzczOTk4MTc4LCJleHAiOjE3NzQwMDUzNzh9.Hq8Q_pm4iQhynVGd2de51kkfi3pk-3nNGTjjEyNXchM
+2026-03-20 17:16:35.844 [http-nio-8080-exec-8] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-20 17:16:35.876 [http-nio-8080-exec-8] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-20 17:17:03.685 [http-nio-8080-exec-9] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzczOTk4MTc4LCJleHAiOjE3NzQwMDUzNzh9.Hq8Q_pm4iQhynVGd2de51kkfi3pk-3nNGTjjEyNXchM
+2026-03-20 17:17:03.687 [http-nio-8080-exec-9] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-20 17:17:03.705 [http-nio-8080-exec-9] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-20 17:17:50.445 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-20 17:17:50.448 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-20 17:20:37.163 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 38278 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 17:20:37.164 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 17:20:37.165 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 17:20:37.954 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 17:20:37.955 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 17:20:37.956 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 17:20:37.991 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 17:20:38.431 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 17:20:38.715 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 17:20:38.728 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 1.94 seconds (process running for 2.597)
+2026-03-20 17:20:38.731 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 17:20:59.225 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 17:20:59.540 [http-nio-8080-exec-1] INFO  org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 286 ms
+2026-03-20 21:22:41.105 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 26518 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 21:22:41.106 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 21:22:41.106 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 21:22:41.736 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 21:22:41.737 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 21:22:41.737 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 21:22:41.760 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 21:22:42.138 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 21:22:42.329 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 21:22:42.339 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 1.575 seconds (process running for 1.935)
+2026-03-20 21:22:42.343 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 21:36:06.053 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 21:38:01.493 [http-nio-8080-exec-6] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-20 21:38:01.499 [http-nio-8080-exec-6] INFO  com.longan.service.impl.UserServiceImpl - 执行用户查询，条件：(email = #{ew.paramNameValuePairs.MPGENVAL1})
+2026-03-20 21:38:01.546 [http-nio-8080-exec-6] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 21:38:01.703 [http-nio-8080-exec-6] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7a971b76
+2026-03-20 21:38:01.705 [http-nio-8080-exec-6] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-20 21:38:01.765 [http-nio-8080-exec-6] INFO  com.longan.service.impl.UserServiceImpl - 用户登录成功，用户名：123456789
+2026-03-20 21:42:24.304 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-20 21:42:24.306 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-20 23:32:02.825 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 20212 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 23:32:02.827 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 23:32:02.828 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 23:32:03.877 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 23:32:03.878 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 23:32:03.878 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 23:32:03.903 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 23:32:04.304 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 23:32:04.555 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 23:32:04.569 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 2.391 seconds (process running for 2.863)
+2026-03-20 23:32:04.571 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 23:35:55.749 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 23:37:58.948 [http-nio-8080-exec-2] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=12334456789, password=000000)
+2026-03-20 23:37:58.953 [http-nio-8080-exec-2] INFO  com.longan.service.impl.UserServiceImpl - 执行用户查询，条件：(email = #{ew.paramNameValuePairs.MPGENVAL1})
+2026-03-20 23:37:58.998 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 23:38:00.060 [http-nio-8080-exec-2] ERROR com.longan.service.impl.UserServiceImpl - 用户登录查询异常，用户名：12334456789
+org.mybatis.spring.MyBatisSystemException: null
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:97)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:439)
+	at jdk.proxy2/jdk.proxy2.$Proxy83.selectList(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.selectList(SqlSessionTemplate.java:224)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.executeForMany(MybatisMapperMethod.java:164)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:77)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:152)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89)
+	at jdk.proxy2/jdk.proxy2.$Proxy88.selectList(Unknown Source)
+	at com.baomidou.mybatisplus.core.mapper.BaseMapper.selectOne(BaseMapper.java:222)
+	at java.base/java.lang.invoke.MethodHandle.invokeWithArguments(MethodHandle.java:732)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$DefaultMethodInvoker.invoke(MybatisMapperProxy.java:166)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89)
+	at jdk.proxy2/jdk.proxy2.$Proxy88.selectOne(Unknown Source)
+	at com.baomidou.mybatisplus.core.mapper.BaseMapper.selectOne(BaseMapper.java:211)
+	at java.base/java.lang.invoke.MethodHandle.invokeWithArguments(MethodHandle.java:732)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$DefaultMethodInvoker.invoke(MybatisMapperProxy.java:166)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89)
+	at jdk.proxy2/jdk.proxy2.$Proxy88.selectOne(Unknown Source)
+	at com.longan.service.impl.UserServiceImpl.login(UserServiceImpl.java:42)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:724)
+	at com.longan.service.impl.UserServiceImpl$$SpringCGLIB$$0.login(<generated>)
+	at com.longan.controller.UserController.login(UserController.java:59)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection
+### The error may exist in com/longan/mapper/UserMapper.java (best guess)
+### The error may involve com.longan.mapper.UserMapper.selectList
+### The error occurred while executing a query
+### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:156)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:147)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:142)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425)
+	... 76 common frames omitted
+Caused by: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:84)
+	at org.mybatis.spring.transaction.SpringManagedTransaction.openConnection(SpringManagedTransaction.java:80)
+	at org.mybatis.spring.transaction.SpringManagedTransaction.getConnection(SpringManagedTransaction.java:67)
+	at org.apache.ibatis.executor.BaseExecutor.getConnection(BaseExecutor.java:348)
+	at org.apache.ibatis.executor.SimpleExecutor.prepareStatement(SimpleExecutor.java:89)
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:64)
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:336)
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:158)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:110)
+	at com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor.intercept(MybatisPlusInterceptor.java:81)
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:59)
+	at jdk.proxy2/jdk.proxy2.$Proxy108.query(Unknown Source)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:154)
+	... 83 common frames omitted
+Caused by: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:165)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:55)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:837)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:420)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:238)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:180)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:139)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:368)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:205)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:483)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:571)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:101)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:111)
+	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:160)
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:118)
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:81)
+	... 95 common frames omitted
+Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:52)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:95)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:140)
+	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:156)
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:79)
+	at com.mysql.cj.NativeSession.connect(NativeSession.java:142)
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:961)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:825)
+	... 108 common frames omitted
+Caused by: java.net.ConnectException: 连接被拒绝
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:672)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:547)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:602)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:633)
+	at com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:144)
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:53)
+	... 111 common frames omitted
+2026-03-20 23:38:33.848 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 23228 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-20 23:38:33.849 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-20 23:38:33.849 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-20 23:38:34.500 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-20 23:38:34.501 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-20 23:38:34.501 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-20 23:38:34.525 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-20 23:38:34.915 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-20 23:38:35.098 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-20 23:38:35.109 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 1.641 seconds (process running for 1.953)
+2026-03-20 23:38:35.110 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-20 23:38:40.264 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-20 23:38:40.313 [http-nio-8080-exec-1] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=12334456789, password=000000)
+2026-03-20 23:38:40.317 [http-nio-8080-exec-1] INFO  com.longan.service.impl.UserServiceImpl - 执行用户查询，条件：(email = #{ew.paramNameValuePairs.MPGENVAL1})
+2026-03-20 23:38:40.356 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-20 23:38:40.453 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2de7d816
+2026-03-20 23:38:40.454 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-20 23:38:40.493 [http-nio-8080-exec-1] INFO  com.longan.service.impl.UserServiceImpl - 邮箱不存在，用户名：12334456789
+2026-03-20 23:38:51.270 [http-nio-8080-exec-2] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-20 23:38:51.271 [http-nio-8080-exec-2] INFO  com.longan.service.impl.UserServiceImpl - 执行用户查询，条件：(email = #{ew.paramNameValuePairs.MPGENVAL1})
+2026-03-20 23:38:51.281 [http-nio-8080-exec-2] INFO  com.longan.service.impl.UserServiceImpl - 用户登录成功，用户名：123456789
+2026-03-20 23:39:24.093 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-20 23:39:24.095 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

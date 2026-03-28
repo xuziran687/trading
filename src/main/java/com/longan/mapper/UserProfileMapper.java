@@ -11,6 +11,7 @@ import com.longan.pojo.entity.UserProfile;
 */
 public interface UserProfileMapper extends BaseMapper<UserProfile> {
 
+    void updateByUserId(UserProfile userProfile);
 }
 
 

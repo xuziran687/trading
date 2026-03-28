@@ -1,0 +1,175 @@
+2026-03-22 13:10:43.833 [main] INFO  com.longan.LonganApexApplication - Starting LonganApexApplication using Java 17.0.10 with PID 144690 (/mnt/date/Projects/test/longan-apex/longan_apex/target/classes started by fedora in /mnt/date/Projects/test/longan-apex/longan_apex)
+2026-03-22 13:10:43.835 [main] DEBUG com.longan.LonganApexApplication - Running with Spring Boot v3.5.3, Spring v6.2.8
+2026-03-22 13:10:43.836 [main] INFO  com.longan.LonganApexApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-22 13:10:44.649 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-22 13:10:44.650 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-22 13:10:44.651 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.42]
+2026-03-22 13:10:44.688 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-22 13:10:45.090 [main] INFO  com.longan.config.WebMvcConfiguration - 开始注册自定义拦截器...
+2026-03-22 13:10:45.332 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-22 13:10:45.346 [main] INFO  com.longan.LonganApexApplication - Started LonganApexApplication in 1.927 seconds (process running for 2.665)
+2026-03-22 13:10:45.348 [main] INFO  com.longan.LonganApexApplication - 启动成功
+2026-03-22 13:11:22.249 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-22 13:11:22.269 [http-nio-8080-exec-1] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzc0MDcwODk0LCJleHAiOjE3NzQwNzgwOTR9.cjoF5UmIKFMV4BZTdaz0_CXNZMC9P3uY509jk52J-l8
+2026-03-22 13:11:22.313 [http-nio-8080-exec-1] ERROR com.longan.JWT.JwtTokenInterceptor - JWT校验失败
+io.jsonwebtoken.ExpiredJwtException: JWT expired at 2026-03-21T07:28:14Z. Current time: 2026-03-22T05:11:22Z, a difference of 78188312 milliseconds.  Allowed clock skew: 0 milliseconds.
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:427)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:529)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:589)
+	at io.jsonwebtoken.impl.ImmutableJwtParser.parseClaimsJws(ImmutableJwtParser.java:173)
+	at com.longan.JWT.JwtUtil.parseJWT(JwtUtil.java:44)
+	at com.longan.JWT.JwtTokenInterceptor.preHandle(JwtTokenInterceptor.java:40)
+	at org.springframework.web.servlet.HandlerExecutionChain.applyPreHandle(HandlerExecutionChain.java:146)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1084)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2026-03-22 13:11:43.276 [http-nio-8080-exec-2] INFO  com.longan.controller.UserController - 登录：LoginDTO(email=123456789, password=000000)
+2026-03-22 13:11:43.283 [http-nio-8080-exec-2] INFO  com.longan.service.impl.UserServiceImpl - 执行用户查询，条件：(email = #{ew.paramNameValuePairs.MPGENVAL1})
+2026-03-22 13:11:43.337 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-22 13:11:43.440 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@e72e9ee
+2026-03-22 13:11:43.441 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-22 13:11:43.499 [http-nio-8080-exec-2] INFO  com.longan.service.impl.UserServiceImpl - 用户登录成功，用户名：123456789
+2026-03-22 13:11:43.560 [http-nio-8080-exec-3] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzc0MTU2MzAzLCJleHAiOjE3NzQxNjM1MDN9.aZLOZtrqEUMzoFFiqw8D4CsTvl6byW2K7ZLtgjiys_A
+2026-03-22 13:11:43.563 [http-nio-8080-exec-3] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-22 13:11:43.574 [http-nio-8080-exec-3] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-22 13:11:43.732 [http-nio-8080-exec-4] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzc0MTU2MzAzLCJleHAiOjE3NzQxNjM1MDN9.aZLOZtrqEUMzoFFiqw8D4CsTvl6byW2K7ZLtgjiys_A
+2026-03-22 13:11:43.734 [http-nio-8080-exec-4] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-22 13:11:43.874 [http-nio-8080-exec-4] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-22 13:11:50.756 [http-nio-8080-exec-5] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzc0MTU2MzAzLCJleHAiOjE3NzQxNjM1MDN9.aZLOZtrqEUMzoFFiqw8D4CsTvl6byW2K7ZLtgjiys_A
+2026-03-22 13:11:50.758 [http-nio-8080-exec-5] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-22 13:11:50.769 [http-nio-8080-exec-5] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-22 13:12:29.394 [http-nio-8080-exec-6] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzc0MTU2MzAzLCJleHAiOjE3NzQxNjM1MDN9.aZLOZtrqEUMzoFFiqw8D4CsTvl6byW2K7ZLtgjiys_A
+2026-03-22 13:12:29.396 [http-nio-8080-exec-6] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-22 13:12:29.411 [http-nio-8080-exec-6] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-22 13:12:29.848 [http-nio-8080-exec-7] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzc0MTU2MzAzLCJleHAiOjE3NzQxNjM1MDN9.aZLOZtrqEUMzoFFiqw8D4CsTvl6byW2K7ZLtgjiys_A
+2026-03-22 13:12:29.849 [http-nio-8080-exec-7] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-22 13:12:29.860 [http-nio-8080-exec-7] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-22 13:12:30.498 [http-nio-8080-exec-8] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzc0MTU2MzAzLCJleHAiOjE3NzQxNjM1MDN9.aZLOZtrqEUMzoFFiqw8D4CsTvl6byW2K7ZLtgjiys_A
+2026-03-22 13:12:30.500 [http-nio-8080-exec-8] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-22 13:12:30.510 [http-nio-8080-exec-8] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-22 13:17:04.613 [http-nio-8080-exec-9] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzc0MTU2MzAzLCJleHAiOjE3NzQxNjM1MDN9.aZLOZtrqEUMzoFFiqw8D4CsTvl6byW2K7ZLtgjiys_A
+2026-03-22 13:17:04.615 [http-nio-8080-exec-9] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-22 13:17:04.625 [http-nio-8080-exec-9] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-22 13:18:45.573 [http-nio-8080-exec-1] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzc0MTU2MzAzLCJleHAiOjE3NzQxNjM1MDN9.aZLOZtrqEUMzoFFiqw8D4CsTvl6byW2K7ZLtgjiys_A
+2026-03-22 13:18:45.574 [http-nio-8080-exec-1] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-22 13:18:45.575 [http-nio-8080-exec-1] INFO  com.longan.controller.GoodsController - 商品详情：1001
+2026-03-22 13:18:45.590 [http-nio-8080-exec-1] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-22 13:20:56.361 [http-nio-8080-exec-2] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzc0MTU2MzAzLCJleHAiOjE3NzQxNjM1MDN9.aZLOZtrqEUMzoFFiqw8D4CsTvl6byW2K7ZLtgjiys_A
+2026-03-22 13:20:56.363 [http-nio-8080-exec-2] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-22 13:20:56.363 [http-nio-8080-exec-2] INFO  com.longan.controller.GoodsController - 商品详情：1001
+2026-03-22 13:20:56.374 [http-nio-8080-exec-2] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-22 13:24:05.820 [http-nio-8080-exec-3] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzc0MTU2MzAzLCJleHAiOjE3NzQxNjM1MDN9.aZLOZtrqEUMzoFFiqw8D4CsTvl6byW2K7ZLtgjiys_A
+2026-03-22 13:24:05.822 [http-nio-8080-exec-3] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-22 13:24:05.822 [http-nio-8080-exec-3] INFO  com.longan.controller.GoodsController - 商品详情：1001
+2026-03-22 13:24:05.831 [http-nio-8080-exec-3] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-22 13:26:46.545 [http-nio-8080-exec-4] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzc0MTU2MzAzLCJleHAiOjE3NzQxNjM1MDN9.aZLOZtrqEUMzoFFiqw8D4CsTvl6byW2K7ZLtgjiys_A
+2026-03-22 13:26:46.547 [http-nio-8080-exec-4] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-22 13:26:46.547 [http-nio-8080-exec-4] INFO  com.longan.controller.GoodsController - 商品详情：1001
+2026-03-22 13:26:46.557 [http-nio-8080-exec-4] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-22 13:27:15.687 [http-nio-8080-exec-5] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzc0MTU2MzAzLCJleHAiOjE3NzQxNjM1MDN9.aZLOZtrqEUMzoFFiqw8D4CsTvl6byW2K7ZLtgjiys_A
+2026-03-22 13:27:15.688 [http-nio-8080-exec-5] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-22 13:27:15.696 [http-nio-8080-exec-5] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-22 13:27:16.805 [http-nio-8080-exec-6] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzc0MTU2MzAzLCJleHAiOjE3NzQxNjM1MDN9.aZLOZtrqEUMzoFFiqw8D4CsTvl6byW2K7ZLtgjiys_A
+2026-03-22 13:27:16.806 [http-nio-8080-exec-6] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-22 13:27:16.806 [http-nio-8080-exec-6] INFO  com.longan.controller.GoodsController - 商品详情：1001
+2026-03-22 13:27:16.813 [http-nio-8080-exec-6] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-22 13:27:19.113 [http-nio-8080-exec-7] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzc0MTU2MzAzLCJleHAiOjE3NzQxNjM1MDN9.aZLOZtrqEUMzoFFiqw8D4CsTvl6byW2K7ZLtgjiys_A
+2026-03-22 13:27:19.114 [http-nio-8080-exec-7] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-22 13:27:19.123 [http-nio-8080-exec-7] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-22 13:27:20.212 [http-nio-8080-exec-8] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzc0MTU2MzAzLCJleHAiOjE3NzQxNjM1MDN9.aZLOZtrqEUMzoFFiqw8D4CsTvl6byW2K7ZLtgjiys_A
+2026-03-22 13:27:20.213 [http-nio-8080-exec-8] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-22 13:27:20.213 [http-nio-8080-exec-8] INFO  com.longan.controller.GoodsController - 商品详情：1001
+2026-03-22 13:27:20.222 [http-nio-8080-exec-8] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-22 13:31:30.758 [http-nio-8080-exec-9] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzc0MTU2MzAzLCJleHAiOjE3NzQxNjM1MDN9.aZLOZtrqEUMzoFFiqw8D4CsTvl6byW2K7ZLtgjiys_A
+2026-03-22 13:31:30.760 [http-nio-8080-exec-9] INFO  com.longan.JWT.JwtTokenInterceptor - JWT校验成功，用户ID：1001
+2026-03-22 13:31:30.760 [http-nio-8080-exec-9] INFO  com.longan.controller.GoodsController - 商品详情：1001
+2026-03-22 13:31:30.768 [http-nio-8080-exec-9] INFO  com.longan.JWT.JwtTokenInterceptor - 清除ThreadLocal中的用户ID
+2026-03-22 17:10:45.339 [http-nio-8080-exec-10] INFO  com.longan.JWT.JwtTokenInterceptor - 获取到的Token：eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MTAwMSwiaWF0IjoxNzc0MTU2MzAzLCJleHAiOjE3NzQxNjM1MDN9.aZLOZtrqEUMzoFFiqw8D4CsTvl6byW2K7ZLtgjiys_A
+2026-03-22 17:10:45.340 [http-nio-8080-exec-10] ERROR com.longan.JWT.JwtTokenInterceptor - JWT校验失败
+io.jsonwebtoken.ExpiredJwtException: JWT expired at 2026-03-22T07:11:43Z. Current time: 2026-03-22T09:10:45Z, a difference of 7142340 milliseconds.  Allowed clock skew: 0 milliseconds.
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:427)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:529)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:589)
+	at io.jsonwebtoken.impl.ImmutableJwtParser.parseClaimsJws(ImmutableJwtParser.java:173)
+	at com.longan.JWT.JwtUtil.parseJWT(JwtUtil.java:44)
+	at com.longan.JWT.JwtTokenInterceptor.preHandle(JwtTokenInterceptor.java:40)
+	at org.springframework.web.servlet.HandlerExecutionChain.applyPreHandle(HandlerExecutionChain.java:146)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1084)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2026-03-22 17:11:22.692 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-22 17:11:22.697 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

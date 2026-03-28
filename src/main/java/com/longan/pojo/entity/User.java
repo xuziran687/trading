@@ -3,7 +3,8 @@ package com.longan.pojo.entity;
 import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
+
 import lombok.Data;
 
 /**
@@ -22,6 +23,7 @@ public class User implements Serializable {
     /**
      * 用户名
      */
+    @TableField(fill = FieldFill.INSERT)
     private String username;
 
     /**
@@ -30,13 +32,14 @@ public class User implements Serializable {
     private String email;
 
     /**
-     * 密码（加密）
+     * 密码
      */
     private String password;
 
     /**
      * 昵称
      */
+    @TableField(fill = FieldFill.INSERT)
     private String nickname;
 
     /**
@@ -58,13 +61,13 @@ public class User implements Serializable {
      * 创建时间
      */
     @TableField(fill = FieldFill.INSERT)
-    private Date createTime;
+    private LocalDateTime createTime;
 
     /**
      * 更新时间
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

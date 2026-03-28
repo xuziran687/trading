@@ -2,12 +2,12 @@ package com.longan.pojo.DTO;
 
 import lombok.Data;
 
+import java.time.LocalDate;
+
 @Data
 public class UserProfileDTO {
-
-    private String nickname;
-    private String avatar;
-    private String phone;
     private Integer gender;
-    private String introduction;
+    private LocalDate birthday;
+    private String address;
+    private String signature;
 }

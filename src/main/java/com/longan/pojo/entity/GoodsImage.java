@@ -1,16 +1,17 @@
 package com.longan.pojo.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
-import lombok.Data;
+import java.time.LocalDateTime;
 
 /**
  * 商品图片表
+ *
  * @TableName goods_image
  */
-@TableName(value ="goods_image")
+@TableName(value = "goods_image")
 @Data
 public class GoodsImage implements Serializable {
     /**
@@ -38,7 +39,7 @@ public class GoodsImage implements Serializable {
      * 创建时间
      */
     @TableField(fill = FieldFill.INSERT)
-    private Date createTime;
+    private LocalDateTime createTime;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
