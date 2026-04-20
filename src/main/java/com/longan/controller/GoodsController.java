@@ -1,10 +1,10 @@
 package com.longan.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.longan.pojo.DTO.GoodsDTO;
 import com.longan.pojo.DTO.GoodsQueryDTO;
 import com.longan.pojo.VO.GoodsDetailsVO;
 import com.longan.pojo.entity.Goods;
+import com.longan.result.PageResult;
 import com.longan.result.Result;
 import com.longan.service.GoodsImageService;
 import com.longan.service.GoodsService;
@@ -45,9 +45,9 @@ public class GoodsController {
     @Operation(summary = "商品列表")
     @GetMapping("/list")
     public Result list(GoodsQueryDTO query) {
-        IPage<Goods> pageModel = goodsService.pageQuery(query);
+        PageResult<Goods> pageResult = goodsService.pageQuery(query);
 
-        return Result.success(pageModel);
+        return Result.success(pageResult);
     }
 
     //我的商品
@@ -56,8 +56,8 @@ public class GoodsController {
     @GetMapping("/my")
     public Result my(@RequestParam(defaultValue = "1") Integer page,
                      @RequestParam(defaultValue = "10") Integer size) {
-        IPage<Goods> pageModel = goodsService.getMyGoods(page, size);
-        return Result.success(pageModel);
+        PageResult<Goods> pageResult = goodsService.getMyGoods(page, size);
+        return Result.success(pageResult);
 
     }
 

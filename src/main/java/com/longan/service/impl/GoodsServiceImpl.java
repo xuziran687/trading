@@ -15,6 +15,7 @@ import com.longan.pojo.entity.Category;
 import com.longan.pojo.entity.Goods;
 import com.longan.pojo.entity.GoodsImage;
 import com.longan.pojo.entity.User;
+import com.longan.result.PageResult;
 import com.longan.service.GoodsService;
 import com.longan.service.UserService;
 import com.longan.utils.UserContext;
@@ -43,7 +44,7 @@ public class GoodsServiceImpl implements GoodsService {
     private final UserMapper userMapper;
 
     @Override
-    public IPage<Goods> pageQuery(GoodsQueryDTO query) {
+    public PageResult pageQuery(GoodsQueryDTO query) {
         // 1. 创建分页对象 (MyBatis Plus 标准分页)
         Page<Goods> pageInfo = new Page<>(query.getPage(), query.getSize());
 
@@ -87,7 +88,13 @@ public class GoodsServiceImpl implements GoodsService {
         }
 
         // 4. 执行分页查询并返回
-        return Db.page(pageInfo, wrapper);
+        IPage<Goods> page = Db.page(pageInfo, wrapper);
+
+        PageResult<Goods> pageResult = new PageResult<>();
+        pageResult.setPages(page.getPages());
+        pageResult.setTotal(page.getTotal());
+        pageResult.setList(page.getRecords());
+        return pageResult;
     }
 
     @Override
@@ -137,12 +144,17 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public IPage<Goods> getMyGoods(Integer page, Integer size) {
+    public PageResult getMyGoods(Integer page, Integer size) {
         Long userId = UserContext.getUserId();
         Page<Goods> pageInfo = new Page<>(page, size);
         LambdaQueryWrapper<Goods> wrapper = new LambdaQueryWrapper<>(Goods.class);
         wrapper.eq(Goods::getUserId, userId);
-        return Db.page(pageInfo, wrapper);
+        IPage<Goods> pages = Db.page(pageInfo, wrapper);
+        PageResult<Goods> pageResult = new PageResult<>();
+        pageResult.setPages(pages.getPages());
+        pageResult.setTotal(pages.getTotal());
+        pageResult.setList(pages.getRecords());
+        return pageResult;
     }
 
     @Override

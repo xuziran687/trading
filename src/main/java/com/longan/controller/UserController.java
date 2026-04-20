@@ -163,7 +163,7 @@ public class UserController {
     @Operation(summary = "更新用户资料")
     @PutMapping("/profile")
     public Result updateProfile(@RequestBody UserProfileDTO dto) {
-
+        log.info("更新用户资料：{}", dto);
         userProfileService.updateByUserId(dto);
 
         return Result.success();

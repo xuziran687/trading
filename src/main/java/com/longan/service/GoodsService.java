@@ -1,10 +1,10 @@
 package com.longan.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.longan.pojo.DTO.GoodsDTO;
 import com.longan.pojo.DTO.GoodsQueryDTO;
 import com.longan.pojo.VO.GoodsDetailsVO;
 import com.longan.pojo.entity.Goods;
+import com.longan.result.PageResult;
 
 /**
  * @author hp
@@ -13,11 +13,11 @@ import com.longan.pojo.entity.Goods;
  */
 public interface GoodsService {
 
-    IPage<Goods> pageQuery(GoodsQueryDTO goodsQueryDTO);
+    PageResult pageQuery(GoodsQueryDTO goodsQueryDTO);
 
     GoodsDetailsVO getGoodsDetails(Long id);
 
-    IPage<Goods> getMyGoods(Integer page, Integer size);
+    PageResult getMyGoods(Integer page, Integer size);
 
 
     void insert(Goods goods);
