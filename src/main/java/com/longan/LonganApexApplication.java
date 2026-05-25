@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
-@MapperScan("com.longan.mapper")
+@MapperScan({"com.longan.user.mapper","com.longan.goods.mapper","com.longan.order.mapper","com.longan.chat.mapper","com.longan.common.mapper"})
 public class LonganApexApplication {
 
     // 手动声明log变量

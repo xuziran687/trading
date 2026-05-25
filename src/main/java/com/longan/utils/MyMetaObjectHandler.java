@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -24,9 +25,30 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
      */
     @Override
     public void insertFill(MetaObject metaObject) {
+        // 自动生成用户名：user + 时间戳后8位 + 随机4位
+        if (metaObject.hasSetter("username") && getFieldValByName("username", metaObject) == null) {
+            String username = "user" + System.currentTimeMillis() % 100000000
+                    + String.format("%04d", (int)(Math.random() * 10000));
+            this.setFieldValByName("username", username, metaObject);
+        }
+
         // 使用 setFieldValByName 强制填充，不进行 null 检查
-        this.setFieldValByName("createTime", LocalDateTime.now(), metaObject);
-        this.setFieldValByName("updateTime", LocalDateTime.now(), metaObject);
+        if (metaObject.hasSetter("createTime")) {
+            Class<?> type = metaObject.getSetterType("createTime");
+            if (type == LocalDate.class) {
+                this.setFieldValByName("createTime", LocalDate.now(), metaObject);
+            } else {
+                this.setFieldValByName("createTime", LocalDateTime.now(), metaObject);
+            }
+        }
+        if (metaObject.hasSetter("updateTime")) {
+            Class<?> type = metaObject.getSetterType("updateTime");
+            if (type == LocalDate.class) {
+                this.setFieldValByName("updateTime", LocalDate.now(), metaObject);
+            } else {
+                this.setFieldValByName("updateTime", LocalDateTime.now(), metaObject);
+            }
+        }
 
         // nickname 可以保留 strict 逻辑，因为如果用户自己传了昵称，我们不应该覆盖它
         if (metaObject.hasSetter("nickname") && getFieldValByName("nickname", metaObject) == null) {

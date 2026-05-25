@@ -5,7 +5,7 @@ springdoc:
     path: /swagger-ui.html
     tags-sorter: alpha
     operations-sorter: alpha
-  packages-to-scan: com.longan.controller
+  packages-to-scan: com.longan.user.controller,com.longan.goods.controller,com.longan.order.controller,com.longan.chat.controller,com.longan.common.controller
 
 spring:
   datasource:
@@ -21,10 +21,10 @@ spring:
 
 mybatis-plus:
   # XML 扫描路径（🔥你刚刚问的重点）
-  mapper-locations: classpath*:mapper/*.xml
+  mapper-locations: classpath*:*/mapper/*.xml
 
   # 实体类包（可选，但建议加）
-  type-aliases-package: com.longan.pojo.entity
+  type-aliases-package: com.longan.user.entity,com.longan.goods.entity,com.longan.order.entity,com.longan.chat.entity,com.longan.common.entity
 
   configuration:
     # 下划线转驼峰
