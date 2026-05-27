@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.longan.utils.UserContext;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
  *
  * @TableName order
  */
-@TableName(value = "order")
+@TableName(value = "`order`")
 @Data
 public class Order implements Serializable {
     /**
@@ -75,6 +76,21 @@ public class Order implements Serializable {
     private LocalDateTime finishTime;
 
     /**
+     * 收件人
+     */
+    private String receiver;
+
+    /**
+     * 手机号
+     */
+    private String phone;
+
+    /**
+     * 收货地址
+     */
+    private String address;
+
+    /**
      * 创建时间
      */
     private LocalDateTime createTime;
@@ -86,4 +102,11 @@ public class Order implements Serializable {
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
+
+    public Boolean isBuyer(Long userId){
+        if(userId != buyerId){
+            return false;
+        }
+        return true;
+    }
 }

@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `goods` (
   `category_id` bigint NOT NULL COMMENT '分类ID',
   `user_id` bigint NOT NULL COMMENT '卖家ID',
   `quality` tinyint NOT NULL COMMENT '1全新 299新 395新 4九成新 5七成新及以下',
-  `status` tinyint NOT NULL DEFAULT '1' COMMENT '0下架 1上架 2已卖出',
+  `status` tinyint NOT NULL DEFAULT '1' COMMENT '0下架 1上架 2已卖出 3锁定中',
   `is_deleted` tinyint NOT NULL DEFAULT '0' COMMENT '0未删 1已删',
   `view_count` int NOT NULL DEFAULT '0' COMMENT '浏览量',
   `collect_count` int NOT NULL DEFAULT '0' COMMENT '收藏量',
@@ -129,6 +129,9 @@ CREATE TABLE IF NOT EXISTS `order` (
   `pay_time` datetime DEFAULT NULL COMMENT '支付时间',
   `send_time` datetime DEFAULT NULL COMMENT '发货时间',
   `finish_time` datetime DEFAULT NULL COMMENT '完成时间',
+  `receiver` varchar(50) DEFAULT NULL COMMENT '收件人',
+  `phone` varchar(20) DEFAULT NULL COMMENT '手机号',
+  `address` varchar(255) DEFAULT NULL COMMENT '收货地址',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
@@ -138,20 +141,6 @@ CREATE TABLE IF NOT EXISTS `order` (
   KEY `idx_goods_id` (`goods_id`),
   KEY `idx_status` (`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='订单表';
-
--- ----------------------------
--- 订单地址表
--- ----------------------------
-CREATE TABLE IF NOT EXISTS `order_address` (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-  `order_id` bigint NOT NULL COMMENT '订单ID',
-  `receiver` varchar(50) NOT NULL COMMENT '收件人',
-  `phone` varchar(20) NOT NULL COMMENT '电话',
-  `address` varchar(255) NOT NULL COMMENT '地址',
-  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_order_id` (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='订单地址表';
 
 -- ----------------------------
 -- 支付记录表
@@ -379,7 +368,7 @@ INSERT INTO `user_wallet` (`id`, `user_id`, `balance`, `freeze`, `total_income`,
 (1, 1001, 1500.00, 200.00, 2000.00, 500.00),
 (2, 1002, 3000.00, 0.00, 5000.00, 2000.00);
 
-INSERT INTO `goods` (`id`, `title`, `desc`, `price`, `original_price`, `category_id`, `user_id`, `quality`, `status`, `view_count`, `collect_count`) VALUES
+INSERT INTO `goods` (`id`, `title`, `description`, `price`, `original_price`, `category_id`, `user_id`, `quality`, `status`, `view_count`, `collect_count`) VALUES
 (1001, 'iPhone 13 128G 蓝色', '95新，无划痕，功能完好', 3500.00, 5999.00, 101, 1002, 3, 1, 120, 15),
 (1002, 'MacBook Pro 13寸 M1', '99新，几乎没用过', 6800.00, 9999.00, 102, 1002, 2, 1, 80, 10);
 
@@ -404,11 +393,8 @@ INSERT INTO `chat_message` (`id`, `sender_id`, `receiver_id`, `goods_id`, `conte
 (4001, 1001, 1002, 1001, '你好，商品还在吗？', 1, 1),
 (4002, 1002, 1001, 1001, '在的，随时可以拍', 1, 0);
 
-INSERT INTO `order` (`id`, `order_no`, `buyer_id`, `seller_id`, `goods_id`, `price`, `point_amount`, `status`) VALUES
-(2001, 'O202501010001', 1001, 1002, 1001, 3500.00, 3500.00, 0);
-
-INSERT INTO `order_address` (`id`, `order_id`, `receiver`, `phone`, `address`) VALUES
-(1, 2001, '小明', '13800138000', '北京市海淀区');
+INSERT INTO `order` (`id`, `order_no`, `buyer_id`, `seller_id`, `goods_id`, `price`, `point_amount`, `status`, `receiver`, `phone`, `address`) VALUES
+(2001, 'O202501010001', 1001, 1002, 1001, 3500.00, 3500.00, 0, '小明', '13800138000', '北京市海淀区');
 
 INSERT INTO `chat_sys_message` (`id`, `user_id`, `title`, `content`, `type`) VALUES
 (1, 1001, '订单创建成功', '您的订单 O202501010001 已创建，请尽快支付', 1);
@@ -423,3 +409,19 @@ INSERT INTO `platform_config` (`id`, `config_key`, `config_value`, `desc`) VALUE
 (3, 'withdraw_min', '10', '最低提现10元'),
 (4, 'register_point', '100', '注册送100平台币'),
 (5, 'sign_point', '5', '签到送5平台币');
+
+-- ----------------------------
+-- 用户收货地址表
+-- ----------------------------
+CREATE TABLE IF NOT EXISTS `user_address` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `user_id` bigint NOT NULL COMMENT '用户ID',
+  `receiver` varchar(50) NOT NULL COMMENT '收件人',
+  `phone` varchar(20) NOT NULL COMMENT '手机号',
+  `address` varchar(255) NOT NULL COMMENT '详细地址',
+  `is_default` tinyint NOT NULL DEFAULT '0' COMMENT '0否 1是',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `idx_user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户收货地址表';

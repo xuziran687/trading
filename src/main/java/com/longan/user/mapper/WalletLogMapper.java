@@ -7,4 +7,5 @@ import org.apache.ibatis.annotations.Select;
 public interface WalletLogMapper extends BaseMapper<WalletLog> {
     @Select("select * from user_wallet_log where user_id = #{userId}")
     WalletLog selectByUserId(Long userId);
+
 }

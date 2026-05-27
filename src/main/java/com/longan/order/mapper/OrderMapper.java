@@ -2,6 +2,7 @@ package com.longan.order.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.longan.order.entity.Order;
+import org.apache.ibatis.annotations.Update;
 
 /**
 * @author hp
@@ -11,6 +12,8 @@ import com.longan.order.entity.Order;
 */
 public interface OrderMapper extends BaseMapper<Order> {
 
+    @Update("update `order` set status=#{status} where id=#{id}")
+    void updateStatus(Long id, Integer status);
 }
 
 

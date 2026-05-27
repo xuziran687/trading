@@ -3,142 +3,117 @@ package com.longan.order.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.longan.order.mapper.OrderAddressMapper;
-import com.longan.order.mapper.OrderMapper;
 import com.longan.order.dto.OrderDTO;
+import com.longan.order.dto.RefundDTO;
+import com.longan.order.entity.Order;
+import com.longan.order.entity.Payment;
+import com.longan.order.entity.Refund;
+import com.longan.order.mapper.OrderMapper;
+import com.longan.order.mapper.PaymentMapper;
+import com.longan.order.mapper.RefundMapper;
+import com.longan.order.service.OrderService;
 import com.longan.order.vo.MyOrderVO;
+import com.longan.order.vo.OrderDetailVO;
 import com.longan.order.vo.OrderVO;
 import com.longan.goods.entity.Goods;
 import com.longan.goods.entity.GoodsImage;
-import com.longan.order.entity.Order;
-import com.longan.order.entity.OrderAddress;
-import com.longan.result.PageResult;
-import com.longan.order.service.OrderService;
-import com.longan.goods.service.GoodsService;
 import com.longan.goods.service.GoodsImageService;
+import com.longan.goods.service.GoodsService;
+import com.longan.result.PageResult;
+import com.longan.user.entity.UserWallet;
+import com.longan.user.entity.WalletLog;
+import com.longan.user.mapper.UserWalletMapper;
+import com.longan.user.mapper.WalletLogMapper;
 import com.longan.utils.UserContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * @author hp
- * @description 针对表【order(订单表)】的数据库操作Service实现
- * @createDate 2026-02-05 13:33:03
- */
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
     private final GoodsService goodsService;
     private final OrderMapper orderMapper;
-    private final OrderAddressMapper orderAddressMapper;
     private final GoodsImageService goodsImageService;
+    private final UserWalletMapper walletMapper;
+    private final WalletLogMapper walletLogMapper;
+    private final PaymentMapper paymentMapper;
+    private final RefundMapper refundMapper;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public OrderVO create(OrderDTO orderDTO) {
-        // 逻辑：1.校验商品状态 2.生成唯一订单号 3.插入Order表
         Goods goods = goodsService.selectById(orderDTO.getGoodsId());
         if (goods == null || goods.getStatus() != 1) {
-            return null;
+            throw new RuntimeException("商品不存在或已下架");
         }
+
         Order order = new Order();
-        // 生成唯一订单号
-        order.setOrderNo(String.valueOf(goods.getId()));
-        // 买家 ID
+        order.setOrderNo("ORD" + System.currentTimeMillis() + String.format("%04d", (int) (Math.random() * 10000)));
         order.setBuyerId(UserContext.getUserId());
-        //卖家 ID
         order.setSellerId(goods.getUserId());
-        // 商品 ID
         order.setGoodsId(goods.getId());
-        // 成交价格
         order.setPrice(goods.getPrice());
-        // 平台币支付金额
         order.setPointAmount(goods.getPrice());
-        // 创建order表
+        order.setStatus(0);
+        order.setReceiver(orderDTO.getReceiver());
+        order.setPhone(orderDTO.getPhone());
+        order.setAddress(orderDTO.getAddress());
         orderMapper.insert(order);
 
-        OrderAddress orderAddress = new OrderAddress();
-        // 订单 ID
-        orderAddress.setOrderId(order.getId());
-        // 收货人
-        orderAddress.setReceiver(orderDTO.getReceiver());
-        // 手机号
-        orderAddress.setPhone(orderDTO.getPhone());
-        // 收货地址
-        orderAddress.setAddress(orderDTO.getAddress());
-        // 创建order_address表
-        orderAddressMapper.insert(orderAddress);
+        goods.setStatus(3);
+        goodsService.updateById(goods);
 
-
-        //VO
         OrderVO orderVO = new OrderVO();
         orderVO.setId(order.getId());
         orderVO.setOrderNo(order.getOrderNo());
         orderVO.setPrice(order.getPrice());
         orderVO.setPointAmount(order.getPointAmount());
-
         return orderVO;
     }
 
     @Override
     public PageResult<MyOrderVO> getMyOrder(Integer role, Integer status, Integer page, Integer size) {
-        // 1. 定义 MyBatis Plus 的分页对象 IPage
         IPage<Order> orderPage = new Page<>(page, size);
-
-        // 2. 构造查询条件
         LambdaQueryWrapper<Order> queryWrapper = new LambdaQueryWrapper<>();
 
-        // 角色过滤：1-买家，2-卖家
         if (role != null && role == 1) {
             queryWrapper.eq(Order::getBuyerId, UserContext.getUserId());
         } else {
             queryWrapper.eq(Order::getSellerId, UserContext.getUserId());
         }
 
-        // 状态过滤
         queryWrapper.eq(status != null, Order::getStatus, status);
-
-        // 排序：最新订单在前
         queryWrapper.orderByDesc(Order::getCreateTime);
-
-        // 3. 执行查询（MyBatis Plus 会自动把 count 和 limit 注入 orderPage）
         orderMapper.selectPage(orderPage, queryWrapper);
 
-        // 4. 处理数据转换：将 IPage<Order> 转换为 List<MyOrderVO>
         List<MyOrderVO> voList = orderPage.getRecords().stream().map(order -> {
             MyOrderVO vo = new MyOrderVO();
-            // 订单 ID
             vo.setOrderId(order.getId());
-            // 订单编号
             vo.setOrderNo(order.getOrderNo());
-            // 商品 ID
             vo.setGoodsId(order.getGoodsId());
-            // 价格
             vo.setPrice(order.getPrice());
-            // 状态
             vo.setStatus(order.getStatus());
-            // --- 核心：去 Goods 表查标题和图片 ---
             Goods goods = goodsService.selectById(order.getGoodsId());
             if (goods != null) {
-                // 标题
                 vo.setTitle(goods.getTitle());
             }
             GoodsImage image = goodsImageService.getFirstImageByGoodsId(order.getGoodsId());
             if (image != null) {
-                // 图片
                 vo.setImageUrl(image.getUrl());
             }
+            vo.setCreateTime(order.getCreateTime());
             return vo;
         }).toList();
 
-        // 5. 封装为你自定义的 PageResult
         PageResult<MyOrderVO> result = new PageResult<>();
         result.setList(voList);
         result.setTotal(orderPage.getTotal());
         result.setPages(orderPage.getPages());
-
         return result;
     }
 
@@ -154,9 +129,193 @@ public class OrderServiceImpl implements OrderService {
         orderMapper.updateById(order);
     }
 
+    @Override
+    public OrderDetailVO getOrderDetail(Long id) {
+        return buildOrderDetail(id);
+    }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void buy(Long id) {
+        Long userId = UserContext.getUserId();
+        Order order = orderMapper.selectById(id);
+        if (order == null) {
+            throw new RuntimeException("订单不存在");
+        }
+        if (!order.getBuyerId().equals(userId)) {
+            throw new RuntimeException("无权操作此订单");
+        }
+        if (order.getStatus() != 0) {
+            throw new RuntimeException("订单状态不正确，无法支付");
+        }
+
+        UserWallet buyerWallet = walletMapper.selectByUserId(order.getBuyerId());
+        if (buyerWallet == null || buyerWallet.getBalance().compareTo(order.getPrice()) < 0) {
+            throw new RuntimeException("余额不足，请先充值");
+        }
+
+        buyerWallet.setBalance(buyerWallet.getBalance().subtract(order.getPrice()));
+        buyerWallet.setFreeze(buyerWallet.getFreeze().add(order.getPrice()));
+        buyerWallet.setTotalOutcome(buyerWallet.getTotalOutcome().add(order.getPrice()));
+        walletMapper.updateByUserId(buyerWallet);
+
+        Payment payment = new Payment();
+        payment.setOrderId(order.getId());
+        payment.setPayNo("PAY" + System.currentTimeMillis());
+        payment.setPayType(1);
+        payment.setAmount(order.getPrice());
+        payment.setStatus(1);
+        paymentMapper.insert(payment);
+
+        WalletLog buyerLog = new WalletLog();
+        buyerLog.setUserId(order.getBuyerId());
+        buyerLog.setType(2);
+        buyerLog.setBusinessType(2);
+        buyerLog.setAmount(order.getPrice());
+        buyerLog.setBalance(buyerWallet.getBalance());
+        buyerLog.setOrderNo(order.getOrderNo());
+        buyerLog.setRemark("购买商品，订单号:" + order.getOrderNo());
+        walletLogMapper.insert(buyerLog);
+
+        order.setStatus(1);
+        order.setPayTime(LocalDateTime.now());
+        orderMapper.updateById(order);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void confirm(Long id) {
+        Long userId = UserContext.getUserId();
+        Order order = orderMapper.selectById(id);
+        if (order == null) {
+            throw new RuntimeException("订单不存在");
+        }
+        if (!order.getBuyerId().equals(userId)) {
+            throw new RuntimeException("无权操作此订单");
+        }
+        if (order.getStatus() != 2) {
+            throw new RuntimeException("订单状态不正确，无法确认收货");
+        }
+
+        order.setStatus(3);
+        order.setFinishTime(LocalDateTime.now());
+        orderMapper.updateById(order);
+
+        UserWallet sellerWallet = walletMapper.selectByUserId(order.getSellerId());
+        sellerWallet.setFreeze(sellerWallet.getFreeze().subtract(order.getPrice()));
+        sellerWallet.setBalance(sellerWallet.getBalance().add(order.getPrice()));
+        sellerWallet.setTotalIncome(sellerWallet.getTotalIncome().add(order.getPrice()));
+        walletMapper.updateByUserId(sellerWallet);
+
+        WalletLog sellerLog = new WalletLog();
+        sellerLog.setUserId(order.getSellerId());
+        sellerLog.setType(1);
+        sellerLog.setBusinessType(2);
+        sellerLog.setAmount(order.getPrice());
+        sellerLog.setBalance(sellerWallet.getBalance());
+        sellerLog.setOrderNo(order.getOrderNo());
+        sellerLog.setRemark("商品售出，订单号:" + order.getOrderNo());
+        walletLogMapper.insert(sellerLog);
+
+        Goods goods = goodsService.selectById(order.getGoodsId());
+        goods.setStatus(2);
+        goodsService.updateById(goods);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void send(Long id, String deliveryNo) {
+        Long userId = UserContext.getUserId();
+        Order order = orderMapper.selectById(id);
+        if (order == null) {
+            throw new RuntimeException("订单不存在");
+        }
+        if (!order.getSellerId().equals(userId)) {
+            throw new RuntimeException("无权操作此订单");
+        }
+        if (order.getStatus() != 1) {
+            throw new RuntimeException("订单状态不正确，无法发货");
+        }
+
+        order.setStatus(2);
+        order.setSendTime(LocalDateTime.now());
+        orderMapper.updateById(order);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void cancel(Long id) {
+        Long userId = UserContext.getUserId();
+        Order order = orderMapper.selectById(id);
+        if (order == null) {
+            throw new RuntimeException("订单不存在");
+        }
+        if (!order.getBuyerId().equals(userId)) {
+            throw new RuntimeException("无权操作此订单");
+        }
+        if (order.getStatus() != 0) {
+            throw new RuntimeException("订单状态不正确，无法取消");
+        }
+
+        orderMapper.updateStatus(id, 4);
+
+        Goods goods = goodsService.selectById(order.getGoodsId());
+        goods.setStatus(1);
+        goodsService.updateById(goods);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void applyRefund(RefundDTO refundDTO) {
+        Long userId = UserContext.getUserId();
+        Order order = orderMapper.selectById(refundDTO.getOrderId());
+        if (order == null) {
+            throw new RuntimeException("订单不存在");
+        }
+        if (!order.getBuyerId().equals(userId)) {
+            throw new RuntimeException("无权操作此订单");
+        }
+        if (order.getStatus() != 2) {
+            throw new RuntimeException("订单状态不正确，无法申请退款");
+        }
+
+        orderMapper.updateStatus(order.getId(), 5);
+
+        Refund refund = new Refund();
+        refund.setOrderId(order.getId());
+        refund.setReason(refundDTO.getReason());
+        refund.setAmount(order.getPrice());
+        refund.setStatus(0);
+        refundMapper.insert(refund);
+    }
+
+    private OrderDetailVO buildOrderDetail(Long id) {
+        OrderDetailVO vo = new OrderDetailVO();
+        Order order = orderMapper.selectById(id);
+        if (order == null) {
+            throw new RuntimeException("订单不存在");
+        }
+
+        Long goodsId = order.getGoodsId();
+        Goods goods = goodsService.selectById(goodsId);
+        GoodsImage image = goodsImageService.getFirstImageByGoodsId(goodsId);
+
+        vo.setId(id);
+        vo.setOrderNo(order.getOrderNo());
+        vo.setBuyerId(order.getBuyerId());
+        vo.setSellerId(order.getSellerId());
+        vo.setGoodsId(order.getGoodsId());
+        vo.setGoodsTitle(goods != null ? goods.getTitle() : null);
+        vo.setGoodsImage(image != null ? image.getUrl() : null);
+        vo.setPrice(order.getPrice());
+        vo.setStatus(order.getStatus());
+        vo.setPayTime(order.getPayTime());
+        vo.setSendTime(order.getSendTime());
+        vo.setFinishTime(order.getFinishTime());
+        vo.setCreateTime(order.getCreateTime());
+        vo.setReceiver(order.getReceiver());
+        vo.setPhone(order.getPhone());
+        vo.setAddress(order.getAddress());
+        return vo;
+    }
 }
-
-
-
-

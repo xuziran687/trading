@@ -18,10 +18,10 @@ import java.util.UUID;
 @Slf4j
 public class CommonController {
 
-    @Value("${longan.upload.path}") // 假设基础路径是 /opt/longan/images/
+    @Value("${longan.upload.path}") // /var/www/pic_bed
     private String basePath;
 
-    @Value("${longan.upload.domain}") // 假设域名是 http://localhost:8088/images/
+    @Value("${longan.upload.domain}") // http://localhost:8888/longan_apex/
     private String domain;
 
     @PostMapping("/upload/{type}")
@@ -42,8 +42,6 @@ public class CommonController {
                 : ".png";
         String fileName = UUID.randomUUID().toString() + ext;
 
-        // 3. 动态确定存储目录： /opt/longan/images/user/ 或 /opt/longan/images/goods/
-        // 注意：File.separator 会根据系统自动选 / 或 \
         File dir = new File(basePath + File.separator + type + File.separator);
         if (!dir.exists()) {
             dir.mkdirs();
@@ -55,7 +53,6 @@ public class CommonController {
         log.info("{} 图片已存入: {}", type, dest.getAbsolutePath());
 
         // 5. 返回访问 URL
-        // 结果：http://localhost:8088/images/user/xxxx.png
         String fullUrl = domain + type + "/" + fileName;
         return Result.success(fullUrl);
     }

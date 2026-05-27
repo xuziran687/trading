@@ -1,16 +1,13 @@
 package com.longan.order.service;
 
 import com.longan.order.dto.OrderDTO;
+import com.longan.order.dto.RefundDTO;
 import com.longan.order.vo.MyOrderVO;
 import com.longan.order.vo.OrderVO;
 import com.longan.order.entity.Order;
 import com.longan.result.PageResult;
+import com.longan.order.vo.OrderDetailVO;
 
-/**
- * @author hp
- * @description 针对表【order(订单表)】的数据库操作Service
- * @createDate 2026-02-05 13:33:03
- */
 public interface OrderService {
 
     OrderVO create(OrderDTO orderDTO);
@@ -20,4 +17,16 @@ public interface OrderService {
     Order getById(Long id);
 
     void update(Order order);
+
+    OrderDetailVO getOrderDetail(Long id);
+
+    void confirm(Long id);
+
+    void send(Long id, String deliveryNo);
+
+    void buy(Long id);
+
+    void cancel(Long id);
+
+    void applyRefund(RefundDTO refundDTO);
 }

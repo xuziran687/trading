@@ -3,6 +3,7 @@ package com.longan.goods.controller;
 import com.longan.goods.dto.GoodsDTO;
 import com.longan.goods.dto.GoodsQueryDTO;
 import com.longan.goods.vo.GoodsDetailsVO;
+import com.longan.goods.vo.GoodsListVO;
 import com.longan.goods.entity.Goods;
 import com.longan.result.PageResult;
 import com.longan.result.Result;
@@ -45,8 +46,7 @@ public class GoodsController {
     @Operation(summary = "商品列表")
     @GetMapping("/list")
     public Result list(GoodsQueryDTO query) {
-        PageResult<Goods> pageResult = goodsService.pageQuery(query);
-
+        PageResult<GoodsListVO> pageResult = goodsService.pageQuery(query);
         return Result.success(pageResult);
     }
 
@@ -56,9 +56,8 @@ public class GoodsController {
     @GetMapping("/my")
     public Result my(@RequestParam(defaultValue = "1") Integer page,
                      @RequestParam(defaultValue = "10") Integer size) {
-        PageResult<Goods> pageResult = goodsService.getMyGoods(page, size);
+        PageResult<GoodsListVO> pageResult = goodsService.getMyGoods(page, size);
         return Result.success(pageResult);
-
     }
 
     //18. 修改商品

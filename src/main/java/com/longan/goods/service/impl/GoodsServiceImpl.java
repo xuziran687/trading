@@ -10,6 +10,7 @@ import com.longan.goods.mapper.GoodsMapper;
 import com.longan.goods.dto.GoodsDTO;
 import com.longan.goods.dto.GoodsQueryDTO;
 import com.longan.goods.vo.GoodsDetailsVO;
+import com.longan.goods.vo.GoodsListVO;
 import com.longan.goods.entity.Category;
 import com.longan.goods.entity.Goods;
 import com.longan.goods.entity.GoodsImage;
@@ -25,6 +26,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,14 +44,19 @@ public class GoodsServiceImpl implements GoodsService {
     private final CategoryMapper categoryMapper;
 
     @Override
-    public PageResult pageQuery(GoodsQueryDTO query) {
+    public PageResult<GoodsListVO> pageQuery(GoodsQueryDTO query) {
         Page<Goods> pageInfo = new Page<>(query.getPage(), query.getSize());
         LambdaQueryWrapper<Goods> wrapper = buildQueryWrapper(query);
         IPage<Goods> page = Db.page(pageInfo, wrapper);
-        PageResult<Goods> pageResult = new PageResult<>();
+
+        List<GoodsListVO> voList = page.getRecords().stream()
+                .map(this::convertToListVO)
+                .collect(Collectors.toList());
+
+        PageResult<GoodsListVO> pageResult = new PageResult<>();
         pageResult.setPages(page.getPages());
         pageResult.setTotal(page.getTotal());
-        pageResult.setList(page.getRecords());
+        pageResult.setList(voList);
         return pageResult;
     }
 
@@ -72,6 +79,7 @@ public class GoodsServiceImpl implements GoodsService {
 
         //封装VO
         GoodsDetailsVO goodsDetailsVO = new GoodsDetailsVO();
+        goodsDetailsVO.setId(goods.getId());
         // 标题
         goodsDetailsVO.setTitle(goods.getTitle());
         // 描述
@@ -102,16 +110,21 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public PageResult getMyGoods(Integer page, Integer size) {
+    public PageResult<GoodsListVO> getMyGoods(Integer page, Integer size) {
         Long userId = UserContext.getUserId();
         Page<Goods> pageInfo = new Page<>(page, size);
         LambdaQueryWrapper<Goods> wrapper = new LambdaQueryWrapper<>(Goods.class);
         wrapper.eq(Goods::getUserId, userId);
         IPage<Goods> pages = Db.page(pageInfo, wrapper);
-        PageResult<Goods> pageResult = new PageResult<>();
+
+        List<GoodsListVO> voList = pages.getRecords().stream()
+                .map(this::convertToListVO)
+                .collect(Collectors.toList());
+
+        PageResult<GoodsListVO> pageResult = new PageResult<>();
         pageResult.setPages(pages.getPages());
         pageResult.setTotal(pages.getTotal());
-        pageResult.setList(pages.getRecords());
+        pageResult.setList(voList);
         return pageResult;
     }
 
@@ -165,6 +178,25 @@ public class GoodsServiceImpl implements GoodsService {
             goodsImageMapper.insertBatch(imageList);
         }
     }
+    private GoodsListVO convertToListVO(Goods goods) {
+        GoodsListVO vo = new GoodsListVO();
+        vo.setId(goods.getId());
+        vo.setTitle(goods.getTitle());
+        vo.setPrice(goods.getPrice());
+        vo.setOriginalPrice(goods.getOriginalPrice());
+        vo.setUserId(goods.getUserId());
+        vo.setQuality(goods.getQuality());
+        vo.setStatus(goods.getStatus());
+        vo.setViewCount(goods.getViewCount());
+        vo.setCreateTime(goods.getCreateTime());
+
+        List<GoodsImage> images = goodsImageMapper.selectByGoodsId(goods.getId());
+        if (images != null) {
+            vo.setImageUrls(Collections.singletonList(images.get(0).getUrl()));
+        }
+        return vo;
+    }
+
     private LambdaQueryWrapper<Goods> buildQueryWrapper(GoodsQueryDTO query) {
         LambdaQueryWrapper<Goods> wrapper = new LambdaQueryWrapper<>(Goods.class);
 
