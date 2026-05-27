@@ -9,6 +9,7 @@ import com.longan.result.PageResult;
 import com.longan.result.Result;
 import com.longan.goods.service.GoodsImageService;
 import com.longan.goods.service.GoodsService;
+import com.longan.utils.UserContext;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -51,12 +52,13 @@ public class GoodsController {
     }
 
     //我的商品
-    //GET /api/goods/my?status=1&page=1&size=10
+    //GET /api/goods/my?status=1&page=1&size=12
     @Operation(summary = "我的商品")
     @GetMapping("/my")
-    public Result my(@RequestParam(defaultValue = "1") Integer page,
-                     @RequestParam(defaultValue = "10") Integer size) {
-        PageResult<GoodsListVO> pageResult = goodsService.getMyGoods(page, size);
+    public Result my(@RequestParam(required = false) Integer status,
+                     @RequestParam(defaultValue = "1") Integer page,
+                     @RequestParam(defaultValue = "12") Integer size) {
+        PageResult<GoodsListVO> pageResult = goodsService.getMyGoods(page, size, status);
         return Result.success(pageResult);
     }
 
@@ -66,6 +68,13 @@ public class GoodsController {
     @PutMapping("/{id}")
     public Result update(@PathVariable Long id, @RequestBody GoodsDTO goodsDTO) {
         log.info("修改商品：{}", goodsDTO);
+        Goods existing = goodsService.selectById(id);
+        if (existing == null) {
+            return Result.error("商品不存在");
+        }
+        if (!existing.getUserId().equals(UserContext.getUserId())) {
+            return Result.error("无权修改该商品");
+        }
         Goods goods = new Goods();
         goods.setId(id);
         goods.setTitle(goodsDTO.getTitle());
@@ -85,6 +94,13 @@ public class GoodsController {
     @PostMapping("/{id}/status")
     public Result updateStatus(@PathVariable Long id, Integer status) {
         log.info("修改商品状态：{}", status);
+        Goods existing = goodsService.selectById(id);
+        if (existing == null) {
+            return Result.error("商品不存在");
+        }
+        if (!existing.getUserId().equals(UserContext.getUserId())) {
+            return Result.error("无权操作该商品");
+        }
         Goods goods = new Goods();
         goods.setId(id);
         goods.setStatus(status);
@@ -98,6 +114,13 @@ public class GoodsController {
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Long id) {
         log.info("删除商品：{}", id);
+        Goods existing = goodsService.selectById(id);
+        if (existing == null) {
+            return Result.error("商品不存在");
+        }
+        if (!existing.getUserId().equals(UserContext.getUserId())) {
+            return Result.error("无权删除该商品");
+        }
         Goods goods = new Goods();
         goods.setId(id);
         goods.setIsDeleted(1);

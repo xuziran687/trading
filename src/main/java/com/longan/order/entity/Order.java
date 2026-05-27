@@ -66,6 +66,11 @@ public class Order implements Serializable {
     private LocalDateTime payTime;
 
     /**
+     * 物流单号
+     */
+    private String deliveryNo;
+
+    /**
      * 发货时间
      */
     private LocalDateTime sendTime;

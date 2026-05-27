@@ -110,11 +110,12 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public PageResult<GoodsListVO> getMyGoods(Integer page, Integer size) {
+    public PageResult<GoodsListVO> getMyGoods(Integer page, Integer size, Integer status) {
         Long userId = UserContext.getUserId();
         Page<Goods> pageInfo = new Page<>(page, size);
         LambdaQueryWrapper<Goods> wrapper = new LambdaQueryWrapper<>(Goods.class);
         wrapper.eq(Goods::getUserId, userId);
+        wrapper.eq(status != null, Goods::getStatus, status);
         IPage<Goods> pages = Db.page(pageInfo, wrapper);
 
         List<GoodsListVO> voList = pages.getRecords().stream()
@@ -193,6 +194,11 @@ public class GoodsServiceImpl implements GoodsService {
         List<GoodsImage> images = goodsImageMapper.selectByGoodsId(goods.getId());
         if (images != null) {
             vo.setImageUrls(Collections.singletonList(images.get(0).getUrl()));
+        }
+        User user = userService.selectById(goods.getUserId());
+        if (user != null) {
+            vo.setNickname(user.getNickname());
+            vo.setAvatar(user.getAvatar());
         }
         return vo;
     }

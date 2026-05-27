@@ -18,4 +18,6 @@ public class GoodsListVO {
     private Integer viewCount;
     private LocalDateTime createTime;
     private List<String> imageUrls;
+    private String nickname;
+    private String avatar;
 }

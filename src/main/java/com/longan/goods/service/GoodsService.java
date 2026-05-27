@@ -13,7 +13,7 @@ public interface GoodsService {
 
     GoodsDetailsVO getGoodsDetails(Long id);
 
-    PageResult<GoodsListVO> getMyGoods(Integer page, Integer size);
+    PageResult<GoodsListVO> getMyGoods(Integer page, Integer size, Integer status);
 
     void insert(Goods goods);
 

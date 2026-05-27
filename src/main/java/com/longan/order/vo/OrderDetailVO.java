@@ -17,6 +17,7 @@ public class OrderDetailVO {
 
     private BigDecimal price;
     private Integer status;
+    private String deliveryNo;
     private LocalDateTime payTime;
     private LocalDateTime sendTime;
     private LocalDateTime finishTime;

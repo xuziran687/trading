@@ -8,5 +8,4 @@ public interface UserWalletMapper extends BaseMapper<UserWallet> {
     @Select("select * from user_wallet where user_id = #{userId}")
     UserWallet selectByUserId(Long userId);
 
-    void updateByUserId(UserWallet userWallet);
 }

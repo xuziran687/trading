@@ -157,7 +157,7 @@ public class OrderServiceImpl implements OrderService {
         buyerWallet.setBalance(buyerWallet.getBalance().subtract(order.getPrice()));
         buyerWallet.setFreeze(buyerWallet.getFreeze().add(order.getPrice()));
         buyerWallet.setTotalOutcome(buyerWallet.getTotalOutcome().add(order.getPrice()));
-        walletMapper.updateByUserId(buyerWallet);
+        walletMapper.updateById(buyerWallet);
 
         Payment payment = new Payment();
         payment.setOrderId(order.getId());
@@ -205,7 +205,7 @@ public class OrderServiceImpl implements OrderService {
         sellerWallet.setFreeze(sellerWallet.getFreeze().subtract(order.getPrice()));
         sellerWallet.setBalance(sellerWallet.getBalance().add(order.getPrice()));
         sellerWallet.setTotalIncome(sellerWallet.getTotalIncome().add(order.getPrice()));
-        walletMapper.updateByUserId(sellerWallet);
+        walletMapper.updateById(sellerWallet);
 
         WalletLog sellerLog = new WalletLog();
         sellerLog.setUserId(order.getSellerId());
@@ -237,6 +237,7 @@ public class OrderServiceImpl implements OrderService {
             throw new RuntimeException("订单状态不正确，无法发货");
         }
 
+        order.setDeliveryNo(deliveryNo);
         order.setStatus(2);
         order.setSendTime(LocalDateTime.now());
         orderMapper.updateById(order);
@@ -309,6 +310,7 @@ public class OrderServiceImpl implements OrderService {
         vo.setGoodsImage(image != null ? image.getUrl() : null);
         vo.setPrice(order.getPrice());
         vo.setStatus(order.getStatus());
+        vo.setDeliveryNo(order.getDeliveryNo());
         vo.setPayTime(order.getPayTime());
         vo.setSendTime(order.getSendTime());
         vo.setFinishTime(order.getFinishTime());

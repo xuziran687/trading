@@ -29,5 +29,5 @@ public class GoodsQueryDTO {
     @Schema(description = "页码", required = false)
     Integer page = 1;
     @Schema(description = "每页数量", required = false)
-    Integer size = 10;
+    Integer size = 12;
 }
