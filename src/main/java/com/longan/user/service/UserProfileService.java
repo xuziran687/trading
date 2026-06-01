@@ -12,7 +12,7 @@ public interface UserProfileService  {
 
     UserProfile getByUserId(Long userId);
 
-    void updateByUserId(UserProfileDTO dto);
+    void update(UserProfileDTO dto);
 
-    void insert(UserProfile userProfile);
+    void init(Long id);
 }

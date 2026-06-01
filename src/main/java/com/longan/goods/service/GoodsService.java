@@ -2,6 +2,7 @@ package com.longan.goods.service;
 
 import com.longan.goods.dto.GoodsDTO;
 import com.longan.goods.dto.GoodsQueryDTO;
+import com.longan.goods.dto.MyGoodsQueryDTO;
 import com.longan.goods.vo.GoodsDetailsVO;
 import com.longan.goods.vo.GoodsListVO;
 import com.longan.goods.entity.Goods;
@@ -13,7 +14,7 @@ public interface GoodsService {
 
     GoodsDetailsVO getGoodsDetails(Long id);
 
-    PageResult<GoodsListVO> getMyGoods(Integer page, Integer size, Integer status);
+    PageResult<GoodsListVO> getMyGoods(MyGoodsQueryDTO query);
 
     void insert(Goods goods);
 

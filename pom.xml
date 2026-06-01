@@ -24,7 +24,7 @@
         <springdoc.version>2.7.0</springdoc.version>
         <knife4j.version>4.5.0</knife4j.version>
         <!-- 统一JJWT版本，方便维护 -->
-        <jjwt.version>0.11.5</jjwt.version>
+        <jjwt.version>0.12.6</jjwt.version>
     </properties>
 
     <dependencies>
@@ -32,6 +32,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- WebSocket (STOMP) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
 
         <!-- MyBatis Plus -->
@@ -45,6 +51,7 @@
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
+            <version>9.3.0</version>
             <scope>runtime</scope>
         </dependency>
 

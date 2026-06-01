@@ -9,6 +9,7 @@ import com.longan.goods.mapper.GoodsImageMapper;
 import com.longan.goods.mapper.GoodsMapper;
 import com.longan.goods.dto.GoodsDTO;
 import com.longan.goods.dto.GoodsQueryDTO;
+import com.longan.goods.dto.MyGoodsQueryDTO;
 import com.longan.goods.vo.GoodsDetailsVO;
 import com.longan.goods.vo.GoodsListVO;
 import com.longan.goods.entity.Category;
@@ -110,12 +111,12 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public PageResult<GoodsListVO> getMyGoods(Integer page, Integer size, Integer status) {
+    public PageResult<GoodsListVO> getMyGoods(MyGoodsQueryDTO query) {
         Long userId = UserContext.getUserId();
-        Page<Goods> pageInfo = new Page<>(page, size);
+        Page<Goods> pageInfo = new Page<>(query.getPage(), query.getSize());
         LambdaQueryWrapper<Goods> wrapper = new LambdaQueryWrapper<>(Goods.class);
         wrapper.eq(Goods::getUserId, userId);
-        wrapper.eq(status != null, Goods::getStatus, status);
+        wrapper.eq(query.getStatus() != null, Goods::getStatus, query.getStatus());
         IPage<Goods> pages = Db.page(pageInfo, wrapper);
 
         List<GoodsListVO> voList = pages.getRecords().stream()

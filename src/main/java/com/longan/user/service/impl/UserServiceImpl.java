@@ -1,15 +1,23 @@
 package com.longan.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.longan.user.mapper.UserMapper;
-import com.longan.user.mapper.UserProfileMapper;
+import com.longan.JWT.JwtProperties;
+import com.longan.JWT.JwtUtil;
 import com.longan.user.dto.LoginDTO;
+import com.longan.user.dto.UserInfoDTO;
 import com.longan.user.entity.User;
 import com.longan.user.entity.UserProfile;
+import com.longan.user.mapper.UserMapper;
+import com.longan.user.mapper.UserProfileMapper;
 import com.longan.user.service.UserService;
+import com.longan.user.vo.LoginVO;
+import com.longan.utils.UserContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author hp
@@ -23,52 +31,52 @@ public class UserServiceImpl implements UserService {
 
     private final UserProfileMapper userProfileMapper;
     private final UserMapper userMapper;
+    private final JwtProperties jwtProperties;
 
 
     @Override
-    public User login(LoginDTO loginDTO) {
-        // 1. 初始化查询条件（仅查用户名）
+    public LoginVO login(LoginDTO loginDTO) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("email", loginDTO.getEmail());
 
         try {
             log.info("执行用户查询，条件：{}", queryWrapper.getSqlSegment());
 
-            // 2. 只查询一次数据库，获取用户信息
             User user = userMapper.selectOne(queryWrapper);
 
-            // 3. 第一步：判断邮箱是否存在
             if (user == null) {
-                log.info("邮箱不存在，用户名：{}", loginDTO.getEmail());
-                return null; // 直接返回null，告知Controller登录失败
+                log.info("邮箱不存在，邮箱：{}", loginDTO.getEmail());
+                throw new RuntimeException("邮箱不存在");
             }
 
-            // 4. 第二步：对比密码（关键！直接用已查询的用户对象对比，无需重复查库）
-            // 【重要】生产环境必须用加密密码对比（比如BCrypt），这里先写明文示例，后续要替换
             if (!loginDTO.getPassword().equals(user.getPassword())) {
-                log.info("密码错误，用户名：{}", loginDTO.getEmail());
-                return null; // 密码错误也返回null
+                log.info("密码错误，邮箱：{}", loginDTO.getEmail());
+                throw new RuntimeException("密码错误");
             }
 
-            // 5. 登录成功：返回完整的用户对象（仅返回必要字段更佳）
-            log.info("用户登录成功，用户名：{}", loginDTO.getEmail());
-            return user;
+            log.info("用户登录成功，邮箱：{}", loginDTO.getEmail());
+
+            Map<String, Object> claims = new HashMap<>();
+            claims.put("id", user.getId());
+            String token = JwtUtil.createJWT(
+                    jwtProperties.getSecretKey(),
+                    jwtProperties.getTtl(),
+                    claims);
+
+            return new LoginVO(
+                    user.getId(),
+                    user.getNickname(),
+                    user.getAvatar(),
+                    token);
 
         } catch (Exception e) {
-            log.error("用户登录查询异常，用户名：{}", loginDTO.getEmail(), e);
-            // 若没有自定义异常，也可抛运行时异常，但要确保外层Controller能捕获
+            log.error("用户登录查询异常，邮箱：{}", loginDTO.getEmail(), e);
             throw new RuntimeException("用户查询失败", e);
         }
     }
 
 
-    @Override
-    public UserProfile getProfile(Long userId) {
-        QueryWrapper<UserProfile> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_id", userId);
-        userProfileMapper.selectOne(queryWrapper);
-        return null;
-    }
+
 
     @Override
     public void insert(User user) {
@@ -81,7 +89,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateById(User user) {
+    public void update(UserInfoDTO dto) {
+        Long userId= UserContext.getUserId();
+        User user = userMapper.selectById(userId);
+        user.update(dto);
         userMapper.updateById(user);
     }
 }

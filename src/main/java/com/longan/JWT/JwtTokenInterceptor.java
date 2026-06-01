@@ -28,7 +28,6 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
 
         // 1、从请求头中获取令牌
         String token = request.getHeader(jwtProperties.getTokenName());
-        log.info("获取到的Token：{}", token);
 
         // 2、处理Token前缀（前端传的是 Bearer xxx 格式）
         if (token != null && token.startsWith("Bearer ")) {
@@ -42,8 +41,6 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
             // 核心修复：从Claims中提取用户ID，存入ThreadLocal
             Long userId = claims.get("id", Long.class);
             UserContext.setUserId(userId);
-            log.info("JWT校验成功，用户ID：{}", userId);
-
             // 4、通过，放行
             return true;
         } catch (Exception ex) {
@@ -58,6 +55,5 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         UserContext.clear();
-        log.info("清除ThreadLocal中的用户ID");
     }
 }

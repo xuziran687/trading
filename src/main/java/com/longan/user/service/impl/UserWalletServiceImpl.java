@@ -8,15 +8,13 @@ import com.longan.user.vo.UserWalletVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 @RequiredArgsConstructor
 public class UserWalletServiceImpl implements UserWalletService {
     private final UserWalletMapper walletMapper;
 
-    @Override
-    public void insert(UserWallet wallet) {
-        walletMapper.insert(wallet);
-    }
 
     @Override
     public UserWallet selectByUserId(Long id) {
@@ -41,5 +39,16 @@ public class UserWalletServiceImpl implements UserWalletService {
                 userWallet.getTotalIncome());
 
         return userWalletVO;
+    }
+
+    @Override
+    public void init(Long id) {
+        UserWallet wallet = new UserWallet();
+        wallet.setUserId(id);
+        wallet.setBalance(BigDecimal.ZERO);      // 余额 0
+        wallet.setFreeze(BigDecimal.ZERO);       // 冻结 0
+        wallet.setTotalIncome(BigDecimal.ZERO);  // 累计收入 0
+        wallet.setTotalOutcome(BigDecimal.ZERO); // 累计支出 0
+        walletMapper.insert(wallet);
     }
 }

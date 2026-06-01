@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.longan.user.dto.UserProfileDTO;
 import lombok.Data;
 
 /**
@@ -60,5 +61,6 @@ public class UserProfile implements Serializable {
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
+
 
 }

@@ -98,4 +98,22 @@ public class OrderController {
         orderService.applyRefund(refundDTO);
         return Result.success("申请已提交");
     }
+
+    @Operation(summary = "卖家同意退款")
+    @PostMapping("/refund/{id}/agree")
+    @Transactional(rollbackFor = Exception.class)
+    public Result agreeRefund(@PathVariable Long id) {
+        log.info("卖家同意退款，订单ID:{}", id);
+        orderService.agreeRefund(id);
+        return Result.success("已同意退款，金额已返还买家");
+    }
+
+    @Operation(summary = "卖家拒绝退款")
+    @PostMapping("/refund/{id}/reject")
+    @Transactional(rollbackFor = Exception.class)
+    public Result rejectRefund(@PathVariable Long id) {
+        log.info("卖家拒绝退款，订单ID:{}", id);
+        orderService.rejectRefund(id);
+        return Result.success("已拒绝退款");
+    }
 }

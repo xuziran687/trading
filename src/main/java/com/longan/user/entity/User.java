@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.annotation.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import com.longan.user.dto.UserInfoDTO;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 用户表
@@ -13,6 +15,7 @@ import lombok.Data;
  */
 @TableName(value ="user")
 @Data
+@NoArgsConstructor
 public class User implements Serializable {
     /**
      * 主键ID
@@ -71,4 +74,15 @@ public class User implements Serializable {
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
+
+    public User(String Email, String Password) {
+        this.username = Email;
+        this.password = Password;
+    }
+
+    public void update(UserInfoDTO dto) {
+        this.username = dto.getUsername();
+        this.nickname = dto.getNickname();
+        this.avatar = dto.getAvatar();
+    }
 }

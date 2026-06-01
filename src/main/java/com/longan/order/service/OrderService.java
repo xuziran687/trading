@@ -29,4 +29,8 @@ public interface OrderService {
     void cancel(Long id);
 
     void applyRefund(RefundDTO refundDTO);
+
+    void agreeRefund(Long id);
+
+    void rejectRefund(Long id);
 }

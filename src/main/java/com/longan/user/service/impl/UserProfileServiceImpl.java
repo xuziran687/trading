@@ -2,6 +2,8 @@ package com.longan.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.longan.user.mapper.UserProfileMapper;
 import com.longan.user.dto.UserProfileDTO;
 import com.longan.user.entity.UserProfile;
@@ -28,7 +30,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
-    public void updateByUserId(UserProfileDTO dto) {
+    public void update(UserProfileDTO dto) {
         Long userId = UserContext.getUserId();
 
         // 使用 UpdateWrapper 构造 SQL
@@ -39,13 +41,17 @@ public class UserProfileServiceImpl implements UserProfileService {
                 .set(dto.getAddress() != null, UserProfile::getAddress, dto.getAddress())
                 .set(dto.getSignature() != null, UserProfile::getSignature, dto.getSignature());
 
-        // 第一个参数是 entity (可以传 null)，第二个是 wrapper
         userProfileMapper.update(null, updateWrapper);
     }
 
+
     @Override
-    public void insert(UserProfile userProfile) {
-        userProfileMapper.insert(userProfile);
+    public void init(Long id) {
+        UserProfile profile = new UserProfile();
+        profile.setUserId(id);
+        profile.setGender(0);
+        userProfileMapper.insert(profile);
+
     }
 }
 

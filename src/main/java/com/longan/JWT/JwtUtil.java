@@ -34,14 +34,14 @@
         /**
          * 解析 JWT
          */
-        public static Claims parseJWT(String secretKey, String token) {
+    public static Claims parseJWT(String secretKey, String token) {
 
-            SecretKey key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
+        SecretKey key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
 
-            return Jwts.parserBuilder()
-                    .setSigningKey(key)
-                    .build()
-                    .parseClaimsJws(token)
-                    .getBody();
-        }
+        return Jwts.parser()
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(token)
+                .getBody();
+    }
     }

@@ -2,6 +2,7 @@ package com.longan.goods.controller;
 
 import com.longan.goods.dto.GoodsDTO;
 import com.longan.goods.dto.GoodsQueryDTO;
+import com.longan.goods.dto.MyGoodsQueryDTO;
 import com.longan.goods.vo.GoodsDetailsVO;
 import com.longan.goods.vo.GoodsListVO;
 import com.longan.goods.entity.Goods;
@@ -29,7 +30,6 @@ public class GoodsController {
     @PostMapping
     public Result release(@RequestBody GoodsDTO goodsDTO) {
         log.info("发布商品：{}", goodsDTO);
-        // 所有的逻辑丢给 Service 层处理
         goodsService.publish(goodsDTO);
         return Result.success();
     }
@@ -51,14 +51,10 @@ public class GoodsController {
         return Result.success(pageResult);
     }
 
-    //我的商品
-    //GET /api/goods/my?status=1&page=1&size=12
     @Operation(summary = "我的商品")
     @GetMapping("/my")
-    public Result my(@RequestParam(required = false) Integer status,
-                     @RequestParam(defaultValue = "1") Integer page,
-                     @RequestParam(defaultValue = "12") Integer size) {
-        PageResult<GoodsListVO> pageResult = goodsService.getMyGoods(page, size, status);
+    public Result my(MyGoodsQueryDTO query) {
+        PageResult<GoodsListVO> pageResult = goodsService.getMyGoods(query);
         return Result.success(pageResult);
     }
 

@@ -20,16 +20,14 @@ spring:
 
 
 mybatis-plus:
-  # XML 扫描路径（🔥你刚刚问的重点）
   mapper-locations: classpath*:*/mapper/*.xml
 
-  # 实体类包（可选，但建议加）
   type-aliases-package: com.longan.user.entity,com.longan.goods.entity,com.longan.order.entity,com.longan.chat.entity,com.longan.common.entity
 
   configuration:
     # 下划线转驼峰
     map-underscore-to-camel-case: true
-    # 打印 SQL（开发必开🔥）
+    # 打印 SQL
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
   global-config:

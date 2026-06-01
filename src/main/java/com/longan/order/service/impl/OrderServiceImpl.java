@@ -1,6 +1,7 @@
 package com.longan.order.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.longan.order.dto.OrderDTO;
@@ -31,6 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -280,6 +282,12 @@ public class OrderServiceImpl implements OrderService {
             throw new RuntimeException("订单状态不正确，无法申请退款");
         }
 
+        QueryWrapper<Refund> checkQuery = new QueryWrapper<>();
+        checkQuery.eq("order_id", order.getId()).eq("status", 0);
+        if (refundMapper.selectCount(checkQuery) > 0) {
+            throw new RuntimeException("已有退款申请在处理中");
+        }
+
         orderMapper.updateStatus(order.getId(), 5);
 
         Refund refund = new Refund();
@@ -288,6 +296,85 @@ public class OrderServiceImpl implements OrderService {
         refund.setAmount(order.getPrice());
         refund.setStatus(0);
         refundMapper.insert(refund);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void agreeRefund(Long id) {
+        Long userId = UserContext.getUserId();
+        Order order = orderMapper.selectById(id);
+        if (order == null) {
+            throw new RuntimeException("订单不存在");
+        }
+        if (!order.getSellerId().equals(userId)) {
+            throw new RuntimeException("无权操作此订单");
+        }
+        if (order.getStatus() != 5) {
+            throw new RuntimeException("订单状态不正确，无法处理退款");
+        }
+
+        QueryWrapper<Refund> refundQuery = new QueryWrapper<>();
+        refundQuery.eq("order_id", id).eq("status", 0);
+        Refund refund = refundMapper.selectOne(refundQuery);
+        if (refund == null) {
+            throw new RuntimeException("退款申请不存在或已处理");
+        }
+
+        refund.setStatus(3);
+        refund.setHandleTime(new Date());
+        refundMapper.updateById(refund);
+
+        UserWallet buyerWallet = walletMapper.selectByUserId(order.getBuyerId());
+        buyerWallet.setFreeze(buyerWallet.getFreeze().subtract(order.getPrice()));
+        buyerWallet.setBalance(buyerWallet.getBalance().add(order.getPrice()));
+        walletMapper.updateById(buyerWallet);
+
+        WalletLog buyerLog = new WalletLog();
+        buyerLog.setUserId(order.getBuyerId());
+        buyerLog.setType(1);
+        buyerLog.setBusinessType(3);
+        buyerLog.setAmount(order.getPrice());
+        buyerLog.setBalance(buyerWallet.getBalance());
+        buyerLog.setOrderNo(order.getOrderNo());
+        buyerLog.setRemark("退款，订单号:" + order.getOrderNo());
+        walletLogMapper.insert(buyerLog);
+
+        order.setStatus(4);
+        orderMapper.updateById(order);
+
+        Goods goods = goodsService.selectById(order.getGoodsId());
+        goods.setStatus(1);
+        goodsService.updateById(goods);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void rejectRefund(Long id) {
+        Long userId = UserContext.getUserId();
+        Order order = orderMapper.selectById(id);
+        if (order == null) {
+            throw new RuntimeException("订单不存在");
+        }
+        if (!order.getSellerId().equals(userId)) {
+            throw new RuntimeException("无权操作此订单");
+        }
+        if (order.getStatus() != 5) {
+            throw new RuntimeException("订单状态不正确，无法处理退款");
+        }
+
+        QueryWrapper<Refund> refundQuery = new QueryWrapper<>();
+        refundQuery.eq("order_id", id).eq("status", 0);
+        Refund refund = refundMapper.selectOne(refundQuery);
+        if (refund == null) {
+            throw new RuntimeException("退款申请不存在或已处理");
+        }
+
+        refund.setStatus(2);
+        refund.setHandleTime(new Date());
+        refundMapper.updateById(refund);
+
+        order.setStatus(2);
+        orderMapper.updateById(order);
     }
 
     private OrderDetailVO buildOrderDetail(Long id) {
