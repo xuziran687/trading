@@ -53,6 +53,9 @@ public class OrderServiceImpl implements OrderService {
         if (goods == null || goods.getStatus() != 1) {
             throw new RuntimeException("商品不存在或已下架");
         }
+        if (goods.getUserId().equals(UserContext.getUserId())) {
+            throw new RuntimeException("不能购买自己的商品");
+        }
 
         Order order = new Order();
         order.setOrderNo("ORD" + System.currentTimeMillis() + String.format("%04d", (int) (Math.random() * 10000)));
@@ -146,6 +149,9 @@ public class OrderServiceImpl implements OrderService {
         }
         if (!order.getBuyerId().equals(userId)) {
             throw new RuntimeException("无权操作此订单");
+        }
+        if (order.getBuyerId().equals(order.getSellerId())) {
+            throw new RuntimeException("不能购买自己的商品");
         }
         if (order.getStatus() != 0) {
             throw new RuntimeException("订单状态不正确，无法支付");

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.longan.chat.mapper.ChatMessageMapper">
+    <update id="updateReadStatus">
+        UPDATE chat_message
+        SET status = 1
+        WHERE goods_id = #{goodsId}
+          AND receiver_id = #{userId}
+          AND sender_id = #{targetId}
+          AND status = 0
+    </update>
+</mapper>

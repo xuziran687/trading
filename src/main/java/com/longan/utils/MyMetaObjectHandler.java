@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -32,22 +33,11 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
             this.setFieldValByName("username", username, metaObject);
         }
 
-        // 使用 setFieldValByName 强制填充，不进行 null 检查
         if (metaObject.hasSetter("createTime")) {
-            Class<?> type = metaObject.getSetterType("createTime");
-            if (type == LocalDate.class) {
-                this.setFieldValByName("createTime", LocalDate.now(), metaObject);
-            } else {
-                this.setFieldValByName("createTime", LocalDateTime.now(), metaObject);
-            }
+            this.setFieldValByName("createTime", nowForType(metaObject, "createTime"), metaObject);
         }
         if (metaObject.hasSetter("updateTime")) {
-            Class<?> type = metaObject.getSetterType("updateTime");
-            if (type == LocalDate.class) {
-                this.setFieldValByName("updateTime", LocalDate.now(), metaObject);
-            } else {
-                this.setFieldValByName("updateTime", LocalDateTime.now(), metaObject);
-            }
+            this.setFieldValByName("updateTime", nowForType(metaObject, "updateTime"), metaObject);
         }
 
         // nickname 可以保留 strict 逻辑，因为如果用户自己传了昵称，我们不应该覆盖它
@@ -57,16 +47,20 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
         }
     }
 
-    /**
-     * 更新操作时的自动填充逻辑
-     * 触发时机：调用mapper.update()/service.update()时执行
-     *
-     * @param metaObject 元对象：封装了要更新的实体类对象和字段信息
-     */
     @Override
     public void updateFill(MetaObject metaObject) {
-        // 强制填充 updateTime，无视对象中是否已有值
-        // 确保这里的 "updateTime" 字符串与你实体类中的变量名完全一致（驼峰命名）
-        this.setFieldValByName("updateTime", LocalDateTime.now(), metaObject);
+        if (metaObject.hasSetter("updateTime")) {
+            this.setFieldValByName("updateTime", nowForType(metaObject, "updateTime"), metaObject);
+        }
+    }
+
+    private Object nowForType(MetaObject metaObject, String fieldName) {
+        Class<?> type = metaObject.getSetterType(fieldName);
+        if (type == LocalDate.class) {
+            return LocalDate.now();
+        } else if (type == LocalDateTime.class) {
+            return LocalDateTime.now();
+        }
+        return new Date();
     }
 }

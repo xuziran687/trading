@@ -169,6 +169,18 @@ public class ChatServiceImpl extends ServiceImpl<ChatConversationMapper, ChatCon
         return vo;
     }
 
+    @Override
+    @Transactional
+    public void markAsRead(Long conversationId, Long userId) {
+        ChatConversation conversation = chatConversationMapper.selectById(conversationId);
+        if (conversation == null) return;
+
+        Long targetId = conversation.getUserId().equals(userId) ? conversation.getTargetId() : conversation.getUserId();
+        chatMessageMapper.updateReadStatus(userId, targetId, conversation.getGoodsId());
+
+        chatConversationMapper.updateUnreadCount(conversationId, 0);
+    }
+
     private MessageVO toMessageVO(ChatMessage msg) {
         MessageVO vo = new MessageVO();
         vo.setId(msg.getId());

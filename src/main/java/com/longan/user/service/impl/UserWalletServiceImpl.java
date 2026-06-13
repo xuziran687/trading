@@ -33,6 +33,10 @@ public class UserWalletServiceImpl implements UserWalletService {
     @Override
     public UserWalletVO getWallet(Long userId) {
         UserWallet userWallet = walletMapper.selectByUserId(userId);
+        if (userWallet == null) {
+            init(userId);
+            userWallet = walletMapper.selectByUserId(userId);
+        }
         UserWalletVO userWalletVO = new UserWalletVO(userWallet.getBalance(),
                 userWallet.getTotalOutcome(),
                 userWallet.getFreeze(),

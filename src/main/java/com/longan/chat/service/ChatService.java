@@ -15,4 +15,6 @@ public interface ChatService extends IService<ChatConversation> {
     List<MessageVO> getMessages(Long conversationId, Long userId);
 
     MessageVO sendMessage(SendMessageDTO dto, Long senderId);
+
+    void markAsRead(Long conversationId, Long userId);
 }
